@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smbms.dao.provider.ProviderMapper">
+	<select id="getProviderAll" resultType="Provider">
+		SELECT id,proCode,
+		proName,
+		proDesc, proContact, proPhone, proAddress,
+		proFax, createdBy,
+		creationDate FROM smbms_provider
+		order by creationDate DESC
+	</select>
+	<select id="getProviderList" resultType="Provider">
+		SELECT id,proCode, proName,
+		proDesc, proContact, proPhone, proAddress,
+		proFax, createdBy,
+		creationDate FROM smbms_provider
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="proCode !=null  and proCode != ''">
+				and proCode=#{proCode}
+			</if>
+			<if test="proName!=null  and proName != ''">
+				and proName like CONCAT ('%',#{proName},'%')
+			</if>
+		</trim>
+		order by creationDate DESC limit #{form},#{pageSize}
+	</select>
+	<select id="getProviderCount" resultType="int">
+		select count(1) from smbms_provider
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="proCode !=null  and proCode != ''">
+				and proCode=#{proCode}
+			</if>
+			<if test="proName!=null  and proName != ''">
+				and proName like CONCAT ('%',#{proName},'%')
+			</if>
+		</trim>
+	</select>
+
+</mapper>

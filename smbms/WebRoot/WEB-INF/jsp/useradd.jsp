@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@include file="/WEB-INF/jsp/common/head.jsp"%>
 
 <div class="right">
@@ -9,8 +8,7 @@
             <span>用户管理页面 >> 用户添加页面</span>
         </div>
         <div class="providerAdd">
-            <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/useradd.html">
-            
+            <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/useraddsave.html" enctype="multipart/form-data">
 				<input type="hidden" name="method" value="add">
                 <!--div的class 为error是验证错误，ok是验证成功-->
                 <div>
@@ -59,8 +57,25 @@
                 <div>
                     <label >用户角色：</label>
                     <!-- 列出所有的角色分类 -->
-					<select name="userRole" id="userRole"></select>
+					<!-- <select name="userRole" id="userRole"></select> -->
+					<select name="userRole" id="userRole">
+						<option value="1">系统管理员</option>
+			    		<option value="2">经理</option>
+			    		<option value="3" selected="selected">普通用户</option>
+					</select>
 	        		<font color="red"></font>
+                </div>
+                <div>
+                	<input type="hidden" id="errorinfo" value="${uploadFileError}"/>
+                    <label for="a_idPicPath">证件照：</label>
+                   	<input type="file" name="attachs" id="a_idPicPath"/>
+                    <font color="red"></font>
+                </div>
+               <div>
+                	<input type="hidden" id="errorinfo_wp" value="${uploadWpError}"/>
+                    <label for="a_workPicPath">工作证照片：</label>
+                   	<input type="file" name="attachs" id="a_workPicPath"/>
+                    <font color="red"></font>
                 </div>
                 <div class="providerAddBtn">
                     <input type="button" name="add" id="add" value="保存" >
@@ -71,4 +86,4 @@
 </div>
 </section>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/useradd.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/useradd.js"></script>

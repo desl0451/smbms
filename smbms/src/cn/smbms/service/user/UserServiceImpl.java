@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 		currentPageNo = (currentPageNo - 1) * pageSize;
 
 		List<User> list = userMapper.getUserList(queryUserName, queryUserRole, currentPageNo, pageSize);
-		System.out.println(list.size()+"============");
+		System.out.println(list.size() + "============");
 		return list;
 	}
 
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 */
 	@Override
-	public User selectUserCodeExist(String userCode) throws Exception {
+	public User selectUserCodeExist(String userCode) {
 		// TODO Auto-generated method stub
 		User user = userMapper.getLoginUser(userCode);
 		return user;

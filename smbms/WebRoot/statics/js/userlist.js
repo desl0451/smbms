@@ -4,8 +4,8 @@ var userObj;
 function deleteUser(obj){
 	$.ajax({
 		type:"GET",
-		url:path+"/user/userdel.html",
-		data:{method:"userdel",uid:obj.attr("userid")},
+		url:path+"/jsp/user.do",
+		data:{method:"deluser",uid:obj.attr("userid")},
 		dataType:"json",
 		success:function(data){
 			if(data.delResult == "true"){//删除成功：移除删除行
@@ -50,18 +50,18 @@ $(function(){
 	$(".viewUser").on("click",function(){
 		//将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
 		var obj = $(this);
-		window.location.href=path+"/user/userview.html?userid="+ obj.attr("userid");
+		window.location.href=path+"/user/view/"+ obj.attr("userid");
 	});
 	
 	$(".modifyUser").on("click",function(){
 		var obj = $(this);
-		window.location.href=path+"/user/usermodify.html?userid="+ obj.attr("userid");
+		window.location.href=path+"/user/usermodify.html?uid="+ obj.attr("userid");
 	});
 
 	$('#no').click(function () {
 		cancleBtn();
 	});
-	 
+	
 	$('#yes').click(function () {
 		deleteUser(userObj);
 	});
@@ -72,13 +72,13 @@ $(function(){
 		openYesOrNoDLG();
 	});
 	
-	$(".deleteUser").on("click",function(){
+	/*$(".deleteUser").on("click",function(){
 		var obj = $(this);
-		if(changeDLGContent("你确定要删除用户【"+obj.attr("username")+"】吗？")){
+		if(confirm("你确定要删除用户【"+obj.attr("username")+"】吗？")){
 			$.ajax({
 				type:"GET",
-				url:path+"/user/userdel.html",
-				data:{method:"userdel",uid:obj.attr("userid")},
+				url:path+"/jsp/user.do",
+				data:{method:"deluser",uid:obj.attr("userid")},
 				dataType:"json",
 				success:function(data){
 					if(data.delResult == "true"){//删除成功：移除删除行
@@ -95,5 +95,5 @@ $(function(){
 				}
 			});
 		}
-	});
+	});*/
 });

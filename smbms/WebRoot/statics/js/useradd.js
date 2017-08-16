@@ -7,7 +7,10 @@ var birthday = null;
 var userRole = null;
 var addBtn = null;
 var backBtn = null;
-
+var a_idPicPath = null;
+var errorinfo = null;
+var errorinfo_wp = null;
+var a_workPicPath = null;
 
 $(function(){
 	userCode = $("#userCode");
@@ -19,6 +22,10 @@ $(function(){
 	userRole = $("#userRole");
 	addBtn = $("#add");
 	backBtn = $("#back");
+	a_idPicPath = $("#a_idPicPath");
+	errorinfo = $("#errorinfo");
+	a_workPicPath = $("#a_workPicPath");
+	errorinfo_wp = $("#errorinfo_wp");
 	//初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
 	userCode.next().html("*");
 	userName.next().html("*");
@@ -27,10 +34,20 @@ $(function(){
 	phone.next().html("*");
 	birthday.next().html("*");
 	userRole.next().html("*");
+	if(errorinfo.val() == null || errorinfo.val() == ""){
+		a_idPicPath.next().html("* 上传大小不能超过500K * 上传文件类型必须为：jpg、jpeg、png、pneg");
+	}else{
+		a_idPicPath.next().html(errorinfo.val());
+	}
+	if(errorinfo_wp.val() == null || errorinfo_wp.val() == ""){
+		a_workPicPath.next().html("* 上传大小不能超过500K * 上传文件类型必须为：jpg、jpeg、png、pneg");
+	}else{
+		a_workPicPath.next().html(errorinfo_wp.val());
+	}
 	
-	$.ajax({
+	/*$.ajax({
 		type:"GET",//请求类型
-		url:path+"/role/rolelist.html",//请求的url
+		url:path+"/jsp/user.do",//请求的url
 		data:{method:"getrolelist"},//请求参数
 		dataType:"json",//ajax接口（请求url）返回的数据类型
 		success:function(data){//data：返回数据（json对象）
@@ -48,7 +65,7 @@ $(function(){
 		error:function(data){//当访问时候，404，500 等非200的错误状态码
 			validateTip(userRole.next(),{"color":"red"},imgNo+" 获取用户角色列表error",false);
 		}
-	});
+	});*/
 	
 	
 	
@@ -58,16 +75,17 @@ $(function(){
 	 * jquery的方法传递
 	 */
 	userCode.bind("blur",function(){
-		//ajax后台验证--userCode是否已存在
-		//user.do?method=ucexist&userCode=**
+		
 		$.ajax({
 			type:"GET",//请求类型
-			url:path+"/jsp/user.do",//请求的url
-			data:{method:"ucexist",userCode:userCode.val()},//请求参数
+			url:path+"/user/ucexist.html",//请求的url
+			data:{userCode:userCode.val()},//请求参数
 			dataType:"json",//ajax接口（请求url）返回的数据类型
 			success:function(data){//data：返回数据（json对象）
 				if(data.userCode == "exist"){//账号已存在，错误提示
 					validateTip(userCode.next(),{"color":"red"},imgNo+ " 该用户账号已存在",false);
+				}else if(data.userCode=="null"){
+					validateTip(userCode.next(),{"color":"red"},imgNo+ " 用户账号不能为空",false);
 				}else{//账号可用，正确提示
 					validateTip(userCode.next(),{"color":"green"},imgYes+" 该账号可以使用",true);
 				}
@@ -76,8 +94,6 @@ $(function(){
 				validateTip(userCode.next(),{"color":"red"},imgNo+" 您访问的页面不存在",false);
 			}
 		});
-		
-		
 	}).bind("focus",function(){
 		//显示友情提示
 		validateTip(userCode.next(),{"color":"#666666"},"* 用户编码是您登录系统的账号",false);
@@ -162,9 +178,9 @@ $(function(){
 			birthday.blur();
 		}else if(phone.attr("validateStatus") != "true"){
 			phone.blur();
-		}else if(userRole.attr("validateStatus") != "true"){
+		}/*else if(userRole.attr("validateStatus") != "true"){
 			userRole.blur();
-		}else{
+		}*/else{
 			if(confirm("是否确认提交数据")){
 				$("#userForm").submit();
 			}

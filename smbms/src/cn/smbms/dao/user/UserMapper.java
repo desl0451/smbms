@@ -14,7 +14,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public User getLoginUser(@Param("userCode") String userCode) throws Exception;
+	public User getLoginUser(@Param("userCode") String userCode);
 
 	/**
 	 * 增加用户信息

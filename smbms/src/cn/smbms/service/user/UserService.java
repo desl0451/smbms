@@ -48,7 +48,7 @@ public interface UserService {
 	 * @param userCode
 	 * @return
 	 */
-	public User selectUserCodeExist(String userCode) throws Exception;
+	public User selectUserCodeExist(String userCode);
 
 	/**
 	 * ¸ù¾ÝIDÉ¾³ýuser

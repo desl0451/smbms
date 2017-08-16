@@ -54,4 +54,16 @@
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/statics/common/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/statics/common/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/statics/common/500.jsp</location>
+	</error-page>
 </web-app>

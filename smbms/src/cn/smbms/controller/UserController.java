@@ -132,7 +132,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/ucexist.html")
+	@RequestMapping(value = "/ucexist.json")
 	@ResponseBody
 	public Object userCodeIsExit(@RequestParam String userCode) {
 		logger.debug("userCodeIsExit userCode===================== " + userCode);
@@ -148,5 +148,20 @@ public class UserController {
 		}
 		System.out.println("@###############################(" + JSONArray.toJSONString(resultMap) + ")##");
 		return JSONArray.toJSONString(resultMap);
+	}
+
+	@RequestMapping(value = "/rolelist.json", method = RequestMethod.GET, produces = {
+			"application/json;charset=UTF-8" })
+	@ResponseBody
+	public List<Role> getRoleList() {
+		List<Role> roleList = null;
+		try {
+			roleList = roleService.getRoleListAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logger.debug("roleList size: " + roleList.size());
+		return roleList;
 	}
 }

@@ -45,10 +45,10 @@ $(function(){
 		a_workPicPath.next().html(errorinfo_wp.val());
 	}
 	
-	/*$.ajax({
+	$.ajax({
 		type:"GET",//请求类型
-		url:path+"/jsp/user.do",//请求的url
-		data:{method:"getrolelist"},//请求参数
+		url:path+"/sys/user/rolelist.json",//请求的url
+		data:{},//请求参数
 		dataType:"json",//ajax接口（请求url）返回的数据类型
 		success:function(data){//data：返回数据（json对象）
 			if(data != null){
@@ -65,7 +65,7 @@ $(function(){
 		error:function(data){//当访问时候，404，500 等非200的错误状态码
 			validateTip(userRole.next(),{"color":"red"},imgNo+" 获取用户角色列表error",false);
 		}
-	});*/
+	});
 	
 	
 	
@@ -78,7 +78,7 @@ $(function(){
 		
 		$.ajax({
 			type:"GET",//请求类型
-			url:path+"/user/ucexist.html",//请求的url
+			url:path+"/sys/user/ucexist.json",//请求的url
 			data:{userCode:userCode.val()},//请求参数
 			dataType:"json",//ajax接口（请求url）返回的数据类型
 			success:function(data){//data：返回数据（json对象）

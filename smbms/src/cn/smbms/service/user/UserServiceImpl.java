@@ -92,10 +92,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/*
-	 * (non-Javadoc)
 	 * 
-	 * @see cn.smbms.service.user.UserService#updatePwd(java.lang.Integer,
-	 * java.lang.String)
 	 */
 	@Override
 	public boolean updatePwd(Integer id, String pwd) throws Exception {
@@ -108,6 +105,9 @@ public class UserServiceImpl implements UserService {
 		return bl;
 	}
 
+	/**
+	 * ÓÃ»§µÇÂ¼
+	 */
 	@Override
 	public User login(String userCode, String userPassword) throws Exception {
 		// TODO Auto-generated method stub

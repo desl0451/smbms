@@ -18,8 +18,7 @@ import cn.smbms.tools.Constants;
 import cn.smbms.tools.PageSupport;
 
 @Controller
-@RequestMapping("/bill")
-
+@RequestMapping("/sys/bill")
 public class BillController {
 
 	private Logger logger = Logger.getLogger(BillController.class);
@@ -29,7 +28,7 @@ public class BillController {
 	@Resource
 	private ProviderService providerService;
 
-	@RequestMapping(value = "/billlist.html")
+	@RequestMapping(value = "/list.html")
 	public String getBillList(Model model, @RequestParam(value = "queryname", required = false) String queryProductName,
 			@RequestParam(value = "queryProviderId", required = false) String queryProviderId,
 			@RequestParam(value = "pageIndex", required = false) String pageIndex) throws Exception {
@@ -73,7 +72,10 @@ public class BillController {
 		List<Provider> providerList = providerService.getProviderAll();
 
 		model.addAttribute("providerList", providerList);
-		model.addAttribute("billList", billList); 
+		model.addAttribute("billList", billList);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("currentPageNo", currentPageNo);
 		return "billlist";
 	}
 

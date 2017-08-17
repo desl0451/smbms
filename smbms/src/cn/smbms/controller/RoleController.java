@@ -17,14 +17,14 @@ import cn.smbms.tools.Constants;
 import cn.smbms.tools.PageSupport;
 
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/sys/role")
 public class RoleController {
 	private Logger logger = Logger.getLogger(UserController.class);
 
 	@Resource
 	private RoleService roleService;
 
-	@RequestMapping(value = "/rolelist.html")
+	@RequestMapping(value = "/list.html")
 	public String getRoleList(Model model, @RequestParam(value = "pageIndex", required = false) String pageIndex)
 			throws Exception {
 		logger.info("getUserList----->pageIndex:" + pageIndex);

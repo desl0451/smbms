@@ -25,7 +25,7 @@ import cn.smbms.tools.Constants;
 import cn.smbms.tools.PageSupport;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/sys/user")
 public class UserController {
 	private Logger logger = Logger.getLogger(UserController.class);
 	@Resource
@@ -34,7 +34,7 @@ public class UserController {
 	@Resource
 	private RoleService roleService;
 
-	@RequestMapping(value = "/userlist.html")
+	@RequestMapping(value = "/list.html")
 	public String getUserList(Model model, @RequestParam(value = "queryname", required = false) String queryUserName,
 			@RequestParam(value = "queryUserRole", required = false) String queryUserRole,
 			@RequestParam(value = "pageIndex", required = false) String pageIndex) throws Exception {
@@ -92,7 +92,7 @@ public class UserController {
 		return "syserror";
 	}
 
-	@RequestMapping(value = "/useradd.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/adduser.html", method = RequestMethod.GET)
 	public String useradd(@ModelAttribute("user") User user) {
 		return "useradd";
 	}

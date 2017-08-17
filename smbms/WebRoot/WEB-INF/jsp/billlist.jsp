@@ -6,9 +6,9 @@
 		<strong>你现在所在的位置是:</strong> <span>订单管理页面</span>
 	</div>
 	<div class="search">
-		<form method="get"
-			action="${pageContext.request.contextPath }/bill/billlist.html">
+		<form method="get"	action="${pageContext.request.contextPath }/sys/bill/list.html">
 			<input name="method" value="query" class="input-text" type="hidden">
+			<input type="hidden" name="pageIndex" value="1" />
 			<span>商品名称：</span> <input name="queryProductName" type="text"
 				value="${queryProductName }"> <span>供应商：</span> <select
 				name="queryProviderId">
@@ -77,6 +77,12 @@
 				</tr>
 			</c:forEach>
       </table>
+      <input type="hidden" id="totalPageCount" value="${totalPageCount}" />
+	<c:import url="rollpage.jsp">
+		<c:param name="totalCount" value="${totalCount}" />
+		<c:param name="currentPageNo" value="${currentPageNo}" />
+		<c:param name="totalPageCount" value="${totalPageCount}" />
+	</c:import>
   </div>
 </section>
 

@@ -7,17 +7,17 @@
                 <span>用户管理页面</span>
             </div>
             <div class="search">
-           		<form method="get" action="${pageContext.request.contextPath }/user/userlist.html">
-					<input name="method" value="query" class="input-text" type="hidden">
-					 <span>用户名：</span>
-					 <input name="queryname" class="input-text"	type="text" value="${queryUserName }">
-					 
-					 <span>用户角色：</span>
-					 <select name="queryUserRole">
-						<c:if test="${roleList != null }">
-						   <option value="0">--请选择--</option>
-						   <c:forEach var="role" items="${roleList}">
-						   		<option <c:if test="${role.id == queryUserRole }">selected="selected"</c:if>
+		<form method="get"
+			action="${pageContext.request.contextPath }/sys/user/list.html">
+			<input name="method" value="query" class="input-text" type="hidden">
+			<span>用户名：</span> <input name="queryname" class="input-text"
+				type="text" value="${queryUserName }"> <span>用户角色：</span> <select
+				name="queryUserRole">
+				<c:if test="${roleList != null }">
+					<option value="0">--请选择--</option>
+					<c:forEach var="role" items="${roleList}">
+						<option
+							<c:if test="${role.id == queryUserRole }">selected="selected"</c:if>
 						   		value="${role.id}">${role.roleName}</option>
 						   </c:forEach>
 						</c:if>

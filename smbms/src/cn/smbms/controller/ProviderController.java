@@ -16,13 +16,13 @@ import cn.smbms.tools.Constants;
 import cn.smbms.tools.PageSupport;
 
 @Controller
-@RequestMapping("/pro")
+@RequestMapping("/sys/provider")
 public class ProviderController {
 	private Logger logger = Logger.getLogger(UserController.class);
 	@Resource
 	private ProviderService providerService;
 
-	@RequestMapping(value = "/providerlist.html")
+	@RequestMapping(value = "/list.html")
 	public String getProviderList(Model model,
 			@RequestParam(value = "queryProCode", required = false) String queryProCode,
 			@RequestParam(value = "queryProName", required = false) String queryProName,

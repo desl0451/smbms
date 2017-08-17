@@ -8,7 +8,7 @@
 	</div>
 	<div class="search">
 		<form method="get"
-			action="${pageContext.request.contextPath }/pro/providerlist.html">
+			action="${pageContext.request.contextPath }/sys/provider/list.html">
 			<input name="method" value="query" type="hidden"> <span>供应商编码：</span>
 			<input name="queryProCode" type="text" value="${queryProCode }">
 

@@ -56,7 +56,7 @@ public interface UserService {
 	 * @param delId
 	 * @return
 	 */
-	public boolean deleteUserById(Integer delId) throws Exception;
+	public boolean deleteUserById(Integer delId);
 
 	/**
 	 * 根据ID查找user
@@ -64,7 +64,7 @@ public interface UserService {
 	 * @param id
 	 * @return
 	 */
-	public User getUserById(Integer id) throws Exception;
+	public User getUserById(String id) throws Exception;
 
 	/**
 	 * 修改用户信息

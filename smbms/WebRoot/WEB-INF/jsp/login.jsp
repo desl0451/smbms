@@ -29,7 +29,7 @@
 				<div class="inputbox">
 					<label for="mima">密码：</label> <input type="password"
 						id="userPassword" name="userPassword" placeholder="请输入密码"
-						value="1234567" required />
+						value="8888888" required />
 
 				</div>
 				<div class="subBtn">

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -92,6 +93,12 @@ public class UserController {
 		return "syserror";
 	}
 
+	/**
+	 * 跳转添加用户界面
+	 * 
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping(value = "/adduser.html", method = RequestMethod.GET)
 	public String useradd(@ModelAttribute("user") User user) {
 		return "useradd";
@@ -102,27 +109,18 @@ public class UserController {
 		return "pwdmodify";
 	}
 
-	@RequestMapping(value = "/userview.html")
-	public String userview(Model model, @RequestParam(value = "userid", required = false) Integer queryId)
-			throws Exception {
-		User user = userService.getUserById(queryId);
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	public String view(@PathVariable String id, Model model) throws Exception {
+		logger.debug("view id===================" + id);
+		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
 		return "userview";
 	}
 
-	@RequestMapping(value = "/userdel.html")
-	public String userdel(@RequestParam(value = "userid", required = false) Integer id) throws Exception {
-		boolean i = userService.deleteUserById(id);
-		if (i == true) {
-			return "userlist";
-		} else {
-			return "redirect:/user/syserror.html";
-		}
-	}
+	
 
 	@RequestMapping(value = "/usermodify.html")
-	public String usermodify(Model model, @RequestParam(value = "userid", required = false) Integer id)
-			throws Exception {
+	public String usermodify(Model model, @RequestParam(value = "uid", required = false) String id) throws Exception {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
 		List<Role> roleList = null;
@@ -164,4 +162,22 @@ public class UserController {
 		logger.debug("roleList size: " + roleList.size());
 		return roleList;
 	}
+
+	@RequestMapping(value = "/deleteuser.json")
+	@ResponseBody
+	public Object deluserinfo(@RequestParam String userid) {
+		logger.debug("userCodeIsExit userCode===================== " + userid);
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+		if (StringUtils.isNullOrEmpty(userid)) {
+			resultMap.put("delResult", "notexist");
+		} else {
+			if (userService.deleteUserById(Integer.parseInt(userid))) {
+				resultMap.put("delResult", "true");
+			} else {
+				resultMap.put("delResult", "false");
+			}
+		}
+		return JSONArray.toJSONString(resultMap);
+	}
+	
 }

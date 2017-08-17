@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 */
 	@Override
-	public boolean deleteUserById(Integer delId) throws Exception {
+	public boolean deleteUserById(Integer delId) {
 		boolean bl = false;
 		int did = userMapper.deleteUserById(delId);
 		if (did > 0) {
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 	 * 根据ID修改信息
 	 */
 	@Override
-	public User getUserById(Integer id) throws Exception {
+	public User getUserById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		User user = userMapper.getUserById(id);
 		return user;

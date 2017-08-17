@@ -55,7 +55,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int deleteUserById(@Param("id") Integer delId) throws Exception;
+	public int deleteUserById(@Param("id") Integer id);
 
 	/**
 	 * 通过userId获取user
@@ -64,7 +64,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public User getUserById(@Param("id") Integer id) throws Exception;
+	public User getUserById(@Param("id") String id) throws Exception;
 
 	/**
 	 * 修改用户信息

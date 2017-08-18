@@ -4,7 +4,7 @@
 <mapper namespace="cn.smbms.dao.user.UserMapper">
 	<select id="getLoginUser" resultType="User">
 		select
-		u.id,u.userCode,u.userName,u.userPassword,u.gender,u.birthday,u.phone,u.address,u.userRole,u.createdBy
+		u.id,u.userCode,u.userName,u.userPassword,u.gender,u.birthday,u.phone,u.address,u.userRole,u.createdBy,u.creationDate 
 		from
 		smbms_user u
 		<trim prefix="where" prefixOverrides="and | or">
@@ -28,7 +28,7 @@
 	<select id="getUserList" resultType="User">
 		select
 		u.id,u.userCode,u.userName,u.userPassword,u.gender,u.birthday,u.phone,u.address,u.userRole,u.createdBy,r.roleName
-		as userRoleName from smbms_user u,smbms_role r where u.userRole
+		as userRoleName,u.creationDate from smbms_user u,smbms_role r where u.userRole
 		= r.id
 		<if test="userRole != null and userRole != ''">
 			and u.userRole = #{userRole}
@@ -43,7 +43,7 @@
 	<select id="getUserById" resultType="User">
 		select
 		u.id,u.userCode,u.userName,u.userPassword,u.gender,u.birthday,u.phone,u.address,u.userRole,u.createdBy,r.roleName
-		as userRoleName from smbms_user u,smbms_role r where u.userRole
+		as userRoleName,u.creationDate from smbms_user u,smbms_role r where u.userRole
 		= r.id
 		<if test="id!=null">
 			and u.id=#{id}
@@ -54,4 +54,10 @@
 	<delete id="deleteUserById">
 		delete from smbms_user where id=#{id}
 	</delete>
+	
+	<!-- 修改用户密码 -->
+	<update id="updatePwd">
+	    update smbms_user set userPassword=#{userPassword}
+	    where id=#{id}
+	</update>
 </mapper>

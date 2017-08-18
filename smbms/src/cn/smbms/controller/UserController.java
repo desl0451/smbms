@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -104,11 +106,57 @@ public class UserController {
 		return "useradd";
 	}
 
-	@RequestMapping(value = "/pwdmodify.html")
-	public String pwdmodify() {
+	/**
+	 * 跳转到pwdmodify.jsp页面
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/pwdmodify.html", method = RequestMethod.GET)
+	public String pwdmodify(HttpSession session) {
+		if (session.getAttribute(Constants.USER_SESSION) == null) {
+			return "redirect:/user/login.html";
+		}
 		return "pwdmodify";
 	}
 
+	/**
+	 * pwdmodify.JSP页判断用户名是否正确
+	 * 
+	 * @param oldpassword
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/pwdmodify.json", method = RequestMethod.POST)
+	@ResponseBody
+	public Object getPwdByUserId(@RequestParam String oldpassword, HttpSession session) {
+		logger.debug("getPwdByUserId oldpassword ===================== " + oldpassword);
+		HashMap<String, String> resultMap = new HashMap<String, String>();
+
+		if (StringUtils.isNullOrEmpty(oldpassword)) {
+			resultMap.put("result", "error");
+		} else {
+			User user = (User) session.getAttribute(Constants.USER_SESSION);
+			if (user == null) {
+				resultMap.put("result", "sessionerror");
+			} else if (user.getUserPassword().equals(oldpassword)) {
+				resultMap.put("result", "true");
+			} else {
+				resultMap.put("result", "false");
+			}
+		}
+
+		return JSONArray.toJSONString(resultMap);
+	}
+
+	/**
+	 * 显示用户信息页面跳转
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
 	public String view(@PathVariable String id, Model model) throws Exception {
 		logger.debug("view id===================" + id);
@@ -116,8 +164,6 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "userview";
 	}
-
-	
 
 	@RequestMapping(value = "/usermodify.html")
 	public String usermodify(Model model, @RequestParam(value = "uid", required = false) String id) throws Exception {
@@ -130,6 +176,12 @@ public class UserController {
 
 	}
 
+	/**
+	 * 验证用户名是否正确
+	 * 
+	 * @param userCode
+	 * @return
+	 */
 	@RequestMapping(value = "/ucexist.json")
 	@ResponseBody
 	public Object userCodeIsExit(@RequestParam String userCode) {
@@ -148,6 +200,11 @@ public class UserController {
 		return JSONArray.toJSONString(resultMap);
 	}
 
+	/**
+	 * 返回页面加载时显示的角色信息
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/rolelist.json", method = RequestMethod.GET, produces = {
 			"application/json;charset=UTF-8" })
 	@ResponseBody
@@ -163,6 +220,12 @@ public class UserController {
 		return roleList;
 	}
 
+	/**
+	 * 删除用户信息
+	 * 
+	 * @param userid
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteuser.json")
 	@ResponseBody
 	public Object deluserinfo(@RequestParam String userid) {
@@ -179,5 +242,42 @@ public class UserController {
 		}
 		return JSONArray.toJSONString(resultMap);
 	}
-	
+
+	@RequestMapping(value = "/pwdsave.html")
+	public String pwdSave(@RequestParam(value = "newpassword") String newPassword, HttpSession session,
+			HttpServletRequest request) {
+		boolean flag = false;
+		Object o = session.getAttribute(Constants.USER_SESSION);
+		if (o != null && !StringUtils.isNullOrEmpty(newPassword)) {
+			try {
+				flag = userService.updatePwd(((User) o).getId(), newPassword);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (flag) {
+				request.setAttribute(Constants.SYS_MESSAGE, "修改密码成功,请退出并使用新密码重新登录！");
+				session.removeAttribute(Constants.USER_SESSION);// session注销
+				return "login";
+			} else {
+				request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
+			}
+		} else {
+			request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
+		}
+		return "pwdmodify";
+	}
+
+	@RequestMapping(value = "/view.html")
+	@ResponseBody
+	public User view(@RequestParam String id) {
+		logger.debug("View id==============" + id);
+		User user = new User();
+		try {
+			user = userService.getUserById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 }

@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/common/head.jsp"%>
-        <div class="right">
-            <div class="location">
-                <strong>你现在所在的位置是:</strong>
-                <span>用户管理页面</span>
-            </div>
-            <div class="search">
+<div class="right">
+	<div class="location">
+		<strong>你现在所在的位置是:</strong> <span>用户管理页面</span>
+	</div>
+	<div class="search">
 		<form method="get"
 			action="${pageContext.request.contextPath }/sys/user/list.html">
 			<input name="method" value="query" class="input-text" type="hidden">
@@ -76,7 +75,54 @@
 	          	<c:param name="currentPageNo" value="${currentPageNo}"/>
 	          	<c:param name="totalPageCount" value="${totalPageCount}"/>
           	</c:import>
+          <div class="providerAdd">
+        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/jsp/user.do">
+			<input type="hidden" name="method" value="modifyexe">
+			<input type="hidden" name="uid" value="${user.id }"/>
+			 <div>
+                    <label for="userName">用户名称：</label>
+                    <input type="text" name="userName" readonly id="userName" value="${user.userName }"> 
+					<font color="red"></font>
+             </div>
+			 <div>
+                    <label >用户性别：</label>
+                      <input type="text" id="gender" readonly name="gender" value="<fmt:formatDate
+					value="${user.birthday}" pattern="yyyy-MM-dd" />"
+                  
+             </div>
+			 <div>
+                    <label for="data">出生日期：</label>
+                    <input type="text"  id="birthday" readonly name="birthday" value="<fmt:formatDate
+					value="${user.birthday}" pattern="yyyy-MM-dd" />"
+					readonly="readonly" >
+                    <font color="red"></font>
+              </div>
+			
+		       <div>
+                    <label for="userphone">用户电话：</label>
+                    <input type="text" name="phone" id="phone" readonly value="${user.phone }"> 
+                    <font color="red"></font>
+               </div>
+                <div>
+                    <label for="userAddress">用户地址：</label>
+                    <input type="text" name="address" id="address" readonly value="${user.address }">
+                </div>
+				<div>
+                    <label >用户角色：</label>
+					<input type="text" name="userRole" id="userRole" readonly value="${user.userRole}">					
+        			<font color="red"></font>
+                </div>
+                <div>
+                    <label >创建时间：</label>
+					<input type="text"  id="creationDate" readonly name="creationDate" value="<fmt:formatDate
+					value="${user.creationDate}" pattern="yyyy-MM-dd" />"
+					readonly="readonly" >					
+        			<font color="red"></font>
+                </div>
+            </form>
         </div>
+        </div>
+       
     </section>
 
 <!--点击删除按钮后弹出的页面-->

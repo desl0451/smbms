@@ -29,4 +29,9 @@ public interface ProviderMapper {
 	 * 查询供应商总数量
 	 */
 	public List<Provider> getProviderAll() throws Exception;
+
+	/**
+	 * 根据ID读取供应商
+	 */
+	public Provider getProviderById(@Param("id") Integer id);
 }

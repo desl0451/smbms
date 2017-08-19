@@ -17,7 +17,7 @@
 		creationDate FROM smbms_provider
 		<trim prefix="where" prefixOverrides="and | or">
 			<if test="proCode !=null  and proCode != ''">
-				and proCode=#{proCode}
+				and proCode like CONCAT ('%',#{proCode},'%')
 			</if>
 			<if test="proName!=null  and proName != ''">
 				and proName like CONCAT ('%',#{proName},'%')
@@ -29,7 +29,7 @@
 		select count(1) from smbms_provider
 		<trim prefix="where" prefixOverrides="and | or">
 			<if test="proCode !=null  and proCode != ''">
-				and proCode=#{proCode}
+				and proCode like CONCAT ('%',#{proCode},'%')
 			</if>
 			<if test="proName!=null  and proName != ''">
 				and proName like CONCAT ('%',#{proName},'%')
@@ -37,4 +37,16 @@
 		</trim>
 	</select>
 
+	<!--  -->
+	<select id="getProviderById" resultType="Provider">
+		SELECT id,proCode, proName,
+		proDesc, proContact, proPhone, proAddress,
+		proFax, createdBy,
+		creationDate FROM smbms_provider
+		<trim prefix="where" prefixOverrides="and | or">
+		   <if test="id!=null and id !=''">
+		   	   and id=#{id}
+		   </if>
+		</trim>
+	</select>
 </mapper>

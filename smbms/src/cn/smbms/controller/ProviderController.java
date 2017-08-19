@@ -7,7 +7,9 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.smbms.pojo.Provider;
@@ -19,6 +21,7 @@ import cn.smbms.tools.PageSupport;
 @RequestMapping("/sys/provider")
 public class ProviderController {
 	private Logger logger = Logger.getLogger(UserController.class);
+	
 	@Resource
 	private ProviderService providerService;
 
@@ -64,17 +67,31 @@ public class ProviderController {
 		}
 		providerList = providerService.getProviderList(queryProCode, queryProName, currentPageNo, pageSize);
 		model.addAttribute("providerList", providerList);
-		model.addAttribute("queryUserName", queryProCode);
-		model.addAttribute("queryUserRole", queryProName);
+		model.addAttribute("queryProCode", queryProCode);
+		model.addAttribute("queryProName", queryProName);
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPageNo", currentPageNo);
-		
+
 		return "providerlist";
 	}
 
 	@RequestMapping(value = "/syserror.html")
 	public String sysError() {
 		return "syserror";
+	}
+
+	/**
+	 * 根据ID读取供应商信息
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	public String getProviderByID(Model model,@PathVariable Integer id) {
+		Provider provider = providerService.getProviderById(id);
+		model.addAttribute("provider", provider);
+		return "providerview";
 	}
 }

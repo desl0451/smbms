@@ -9,9 +9,9 @@
 		<form method="get"	action="${pageContext.request.contextPath }/sys/bill/list.html">
 			<input name="method" value="query" class="input-text" type="hidden">
 			<input type="hidden" name="pageIndex" value="1" />
-			<span>商品名称：</span> <input name="queryProductName" type="text"
-				value="${queryProductName }"> <span>供应商：</span> <select
-				name="queryProviderId">
+			<span>商品名称：</span> <input name="queryProductName" type="text"	value="${queryProductName }"> 
+			<span>供应商：</span> 
+			<select	name="queryProviderId">
 				<c:if test="${providerList != null}">
 					<option value="0">--请选择--</option>
 					<c:forEach var="provider" items="${providerList}">
@@ -30,7 +30,7 @@
        		</select>
 			
 			 <input	value="查 询" type="submit" id="searchbutton">
-			 <a href="${pageContext.request.contextPath }/bill/billlist.html">添加订单</a>
+			 <a href="${pageContext.request.contextPath }/bill/list.html">添加订单</a>
 		</form>
        </div>
        <!--账单表格 样式和供应商公用-->

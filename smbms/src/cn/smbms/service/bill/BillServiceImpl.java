@@ -17,17 +17,26 @@ public class BillServiceImpl implements BillService {
 	private BillMapper billMapper;
 
 	@Override
-	public int getBillCount(String queryProductName, Integer queryProviderId) throws Exception {
+	public int getBillCount(String queryProductName, Integer queryProviderId, Integer queryIsPayment) throws Exception {
 		// TODO Auto-generated method stub
-		return billMapper.getBillCount(queryProductName, queryProviderId);
+		return billMapper.getBillCount(queryProductName, queryProviderId, queryIsPayment);
 	}
 
 	@Override
-	public List<Bill> getBillList(String queryProductName, Integer queryProviderId, Integer currentPageNo,
-			Integer pageSize) throws Exception {
+	public List<Bill> getBillList(String queryProductName, Integer queryProviderId, Integer queryIsPayment,
+			Integer currentPageNo, Integer pageSize) throws Exception {
 		// TODO Auto-generated method stub
 		currentPageNo = (currentPageNo - 1) * pageSize;
-		return billMapper.getBillList(queryProductName, queryProviderId, currentPageNo, pageSize);
+		return billMapper.getBillList(queryProductName, queryProviderId, queryIsPayment, currentPageNo, pageSize);
+	}
+
+	/**
+	 * 根据ID读取Bill信息
+	 */
+	@Override
+	public Bill getBillById(Integer id) {
+		// TODO Auto-generated method stub
+		return billMapper.getBillById(id);
 	}
 
 }

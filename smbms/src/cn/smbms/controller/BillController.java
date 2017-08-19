@@ -7,7 +7,9 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.smbms.pojo.Bill;
@@ -29,13 +31,18 @@ public class BillController {
 	private ProviderService providerService;
 
 	@RequestMapping(value = "/list.html")
-	public String getBillList(Model model, @RequestParam(value = "queryname", required = false) String queryProductName,
+	public String getBillList(Model model,
+			@RequestParam(value = "queryProductName", required = false) String queryProductName,
 			@RequestParam(value = "queryProviderId", required = false) String queryProviderId,
+			@RequestParam(value = "queryIsPayment", required = false) String queryIsPayment,
 			@RequestParam(value = "pageIndex", required = false) String pageIndex) throws Exception {
 		logger.info("getBillList------>queryProductName" + queryProductName);
 		logger.info("getBillList------>queryProviderId" + queryProviderId);
+		logger.info("getBillList------>queryIsPayment" + queryIsPayment);
 		logger.info("getBillList------>pageIndex" + pageIndex);
+
 		int _queryProviderId = 0;
+		int _queryIsPayment = 0;
 		List<Bill> billList = null;
 		// 设置页面容量
 		int pageSize = Constants.pageSize;
@@ -47,6 +54,9 @@ public class BillController {
 		if (queryProviderId != null && !queryProviderId.equals("")) {
 			_queryProviderId = Integer.parseInt(queryProviderId);
 		}
+		if (queryIsPayment != null && !queryIsPayment.equals("")) {
+			_queryIsPayment = Integer.parseInt(queryIsPayment);
+		}
 		if (pageIndex != null) {
 			try {
 				currentPageNo = Integer.valueOf(pageIndex);
@@ -55,7 +65,7 @@ public class BillController {
 			}
 		}
 		// 总数量(表)
-		int totalCount = billService.getBillCount(queryProductName, _queryProviderId);
+		int totalCount = billService.getBillCount(queryProductName, _queryProviderId, _queryIsPayment);
 		// 总页数
 		PageSupport pages = new PageSupport();
 		pages.setCurrentPageNo(currentPageNo);
@@ -68,10 +78,14 @@ public class BillController {
 		} else if (currentPageNo > totalPageCount) {
 			currentPageNo = totalPageCount;
 		}
-		billList = billService.getBillList(queryProductName, _queryProviderId, currentPageNo, pageSize);
+		billList = billService.getBillList(queryProductName, _queryProviderId, _queryIsPayment, currentPageNo,
+				pageSize);
 		List<Provider> providerList = providerService.getProviderAll();
 
 		model.addAttribute("providerList", providerList);
+		model.addAttribute("queryProductName", queryProductName);
+		model.addAttribute("queryProviderId", _queryProviderId);
+		model.addAttribute("queryIsPayment", _queryIsPayment);
 		model.addAttribute("billList", billList);
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("totalCount", totalCount);
@@ -84,4 +98,13 @@ public class BillController {
 		return "syserror";
 	}
 
+	/**
+	 * 显示指定ID的Bill信息
+	 */
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	public String getBillById(Model model, @PathVariable Integer id) {
+		Bill bill = billService.getBillById(id);
+		model.addAttribute("bill", bill);
+		return "billview";
+	}
 }

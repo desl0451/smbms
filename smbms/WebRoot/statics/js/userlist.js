@@ -73,6 +73,7 @@ $(function(){
 						$("#phone").val(result.phone);
 						$("#address").val(result.address);
 						$("#userRole").val(result.userRoleName);
+						$("#creationDate").val(result.creationDate);
 					}
 				},
 				error:function(data){

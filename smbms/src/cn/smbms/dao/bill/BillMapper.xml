@@ -11,18 +11,34 @@
 			<if test="providerId!=null and providerId!=''">
 				and providerId=#{providerId}
 			</if>
+			<if test="queryIsPayment!=null and queryIsPayment!=''">
+				and isPayment=#{queryIsPayment}
+			</if>
 		</trim>
 	</select>
 	<select id="getBillList" resultType="Bill">
-		select * from smbms_bill
+		SELECT b.*,p.proName AS providerName FROM smbms_bill b INNER JOIN smbms_provider p ON b.providerId=p.id
 		<trim prefix="where" prefixOverrides="and | or">
 			<if test="productName !=null and productName !=''">
-				and productName like CONCAT('%',#{productName},'%')
+				and b.productName like CONCAT('%',#{productName},'%')
 			</if>
-			<if test="providerId!=null  and providerId!=''">
-				and providerId=#{providerId}
+			<if test="providerId!=null and providerId!=''">
+				and b.providerId=#{providerId}
+			</if>
+			<if test="queryIsPayment!=null and queryIsPayment!=''">
+				and b.isPayment=#{queryIsPayment}
 			</if>
 		</trim>
-		order by creationDate DESC limit #{from},#{pageSize}
+		order by b.creationDate DESC limit #{from},#{pageSize}
+	</select>
+	<!-- 根据ID查找Bill -->
+	<select id="getBillById" resultType="Bill">
+		SELECT b.*,p.proName AS providerName FROM smbms_bill b INNER JOIN smbms_provider p ON b.providerId=p.id
+		<trim prefix="where" prefixOverrides="and | or">
+			<if test="id!=null and id!=''">
+				and b.id=#{id}
+			</if>
+		</trim>
+		
 	</select>
 </mapper>

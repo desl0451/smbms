@@ -15,8 +15,8 @@ public interface BillMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int getBillCount(@Param("productName") String productName, @Param("providerId") Integer providerId)
-			throws Exception;
+	public int getBillCount(@Param("productName") String productName, @Param("providerId") Integer providerId,
+			@Param("queryIsPayment") Integer queryIsPayment) throws Exception;
 
 	/**
 	 * 返回全部信息
@@ -27,5 +27,15 @@ public interface BillMapper {
 	 * @throws Exception
 	 */
 	public List<Bill> getBillList(@Param("productName") String productName, @Param("providerId") Integer providerId,
-			@Param("from") Integer currentPageNo, @Param("pageSize") Integer pageSize) throws Exception;
+			@Param("queryIsPayment") Integer queryIsPayment, @Param("from") Integer currentPageNo,
+			@Param("pageSize") Integer pageSize) throws Exception;
+
+	/**
+	 * 通过billId获取Bill
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public Bill getBillById(@Param("id") Integer id);
 }

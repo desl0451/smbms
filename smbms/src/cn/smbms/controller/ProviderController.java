@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,16 @@ public class ProviderController {
 	@Resource
 	private ProviderService providerService;
 
+	/**
+	 * 显示全部供应商信息
+	 * 
+	 * @param model
+	 * @param queryProCode
+	 * @param queryProName
+	 * @param pageIndex
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/list.html")
 	public String getProviderList(Model model,
 			@RequestParam(value = "queryProCode", required = false) String queryProCode,
@@ -76,6 +87,11 @@ public class ProviderController {
 		return "providerlist";
 	}
 
+	/**
+	 * 跳转错误页
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/syserror.html")
 	public String sysError() {
 		return "syserror";
@@ -115,7 +131,7 @@ public class ProviderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addProvider.html")
-	public String addProvider() {
+	public String addProvider(@ModelAttribute("provider") Provider provider) {
 		return "provideradd";
 	}
 

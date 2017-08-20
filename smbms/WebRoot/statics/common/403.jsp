@@ -31,6 +31,7 @@
 	</div>
 	<div>
 		<img src="statics/images/jp.png"/>
+		  <a href="http://localhost:8080/smbms/">返回首页</a>
 	</div>
 </body>
 </html>

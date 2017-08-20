@@ -84,7 +84,7 @@ $(function(){
 	
 	$(".modifyUser").on("click",function(){
 		var obj = $(this);
-		window.location.href=path+"/sys/user/usermodify.html?uid="+ obj.attr("userid");
+		window.location.href=path+"/sys/user/usermodify/"+ obj.attr("userid");
 	});
 
 	$('#no').click(function () {

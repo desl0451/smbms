@@ -1,19 +1,25 @@
 package cn.smbms.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.smbms.pojo.Bill;
 import cn.smbms.pojo.Provider;
+import cn.smbms.pojo.User;
 import cn.smbms.service.bill.BillService;
 import cn.smbms.service.provider.ProviderService;
 import cn.smbms.tools.Constants;
@@ -107,4 +113,57 @@ public class BillController {
 		model.addAttribute("bill", bill);
 		return "billview";
 	}
+
+	/**
+	 * 修改Bill信息
+	 */
+	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
+	public String modify(Model model, @PathVariable Integer id) {
+		Bill bill = billService.getBillById(id);
+
+		model.addAttribute("bill", bill);
+		return "billmodify";
+	}
+
+	/**
+	 * 修改面面->加载供应商信息
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/modify/providerlist.json")
+	@ResponseBody
+	public List<Provider> getProviderList() {
+		List<Provider> providerList = new ArrayList<Provider>();
+		providerList = providerService.getProviderAll();
+		return providerList;
+	}
+
+	/**
+	 * 修改面页-》保存Bill信息
+	 */
+	@RequestMapping(value = "/modify/save/", method = RequestMethod.POST)
+	public String modifysave(Model model) {
+		return "";
+	}
+
+	/**
+	 * 添加订单页面
+	 */
+	@RequestMapping(value = "/addlist.html")
+	public String addbillpage() {
+		return "billadd";
+	}
+
+	/**
+	 * 保存订单
+	 */
+	@RequestMapping(value = "/save.html", method = RequestMethod.POST)
+	public String billSave(Bill bill) {
+		bill.setCreationDate(new Date());
+		if(billService.addBill(bill)){
+			return "redirect:/user/list.html";
+		}
+		return "billadd";
+	}
+
 }

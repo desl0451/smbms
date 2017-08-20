@@ -27,10 +27,15 @@ public interface ProviderService {
 	/**
 	 * 查询所有供应商记录
 	 */
-	public List<Provider> getProviderAll() throws Exception;
+	public List<Provider> getProviderAll();
 	
 	/**
 	 * 根据ID提取供应商信息
 	 */
 	public Provider getProviderById(Integer id);
+	
+	/**
+	 * 保存供应商信息
+	 */
+	public boolean add(Provider provider);
 }

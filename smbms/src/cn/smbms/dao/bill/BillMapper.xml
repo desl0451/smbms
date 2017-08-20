@@ -17,7 +17,8 @@
 		</trim>
 	</select>
 	<select id="getBillList" resultType="Bill">
-		SELECT b.*,p.proName AS providerName FROM smbms_bill b INNER JOIN smbms_provider p ON b.providerId=p.id
+		SELECT b.*,p.proName AS providerName FROM smbms_bill b INNER JOIN
+		smbms_provider p ON b.providerId=p.id
 		<trim prefix="where" prefixOverrides="and | or">
 			<if test="productName !=null and productName !=''">
 				and b.productName like CONCAT('%',#{productName},'%')
@@ -33,12 +34,18 @@
 	</select>
 	<!-- 根据ID查找Bill -->
 	<select id="getBillById" resultType="Bill">
-		SELECT b.*,p.proName AS providerName FROM smbms_bill b INNER JOIN smbms_provider p ON b.providerId=p.id
+		SELECT b.*,p.proName AS providerName FROM smbms_bill b INNER JOIN
+		smbms_provider p ON b.providerId=p.id
 		<trim prefix="where" prefixOverrides="and | or">
 			<if test="id!=null and id!=''">
 				and b.id=#{id}
 			</if>
 		</trim>
-		
 	</select>
+	<!-- 保存订单信息 -->
+	<insert id="save" parameterType="bill">
+	 	INSERT INTO smbms.smbms_bill(billCode,productName,productDesc,productUnit,productCount,totalPrice,isPayment,createdBy,creationDate,modifyBy,modifyDate,providerId)
+        VALUES
+        (#{billCode},#{productName},#{productDesc},#{productUnit},#{productCount},#{totalPrice},#{isPayment},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{providerId})
+	</insert>
 </mapper>

@@ -14,6 +14,7 @@
 	<div>
 		<img src="statics/images/jg.png"/>
 	</div><!--/span-->
+	  <a href="http://localhost:8080/smbms/">返回首页</a>
 
 </body>
 </html>

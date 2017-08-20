@@ -30,7 +30,7 @@
        		</select>
 			
 			 <input	value="查 询" type="submit" id="searchbutton">
-			 <a href="${pageContext.request.contextPath }/bill/list.html">添加订单</a>
+			 <a href="${pageContext.request.contextPath }/sys/bill/addlist.html">添加订单</a>
 		</form>
        </div>
        <!--账单表格 样式和供应商公用-->

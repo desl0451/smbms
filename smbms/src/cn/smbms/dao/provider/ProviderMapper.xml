@@ -37,7 +37,7 @@
 		</trim>
 	</select>
 
-	<!--  -->
+	<!-- 根据ID查询供应商信息 -->
 	<select id="getProviderById" resultType="Provider">
 		SELECT id,proCode, proName,
 		proDesc, proContact, proPhone, proAddress,
@@ -49,4 +49,10 @@
 		   </if>
 		</trim>
 	</select>
+	
+	<!-- 保存供应商信息 -->
+	<insert id="save" parameterType="provider">
+		INSERT INTO smbms.smbms_provider (proCode,proName,proContact,proPhone,proAddress,proFax,proDesc)
+		VALUES(#{proCode}, #{proName}, #{proContact}, #{proPhone}, #{proAddress}, #{proFax},#{proDesc})
+	</insert>
 </mapper>

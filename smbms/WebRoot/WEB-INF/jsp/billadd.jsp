@@ -7,33 +7,33 @@
          <span>订单管理页面 >> 订单添加页面</span>
      </div>
      <div class="providerAdd">
-         <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill.do">
+         <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/sys/bill/save.html">
              <!--div的class 为error是验证错误，ok是验证成功-->
              <input type="hidden" name="method" value="add">
              <div class="">
                  <label for="billCode">订单编码：</label>
-                 <input type="text" name="billCode" class="text" id="billCode" value=""> 
+                 <input type="text" name="billCode" class="text" id="billCode" value="BILL2016_020"> 
 				 <!-- 放置提示信息 -->
 				 <font color="red"></font>
              </div>
              <div>
                  <label for="productName">商品名称：</label>
-                 <input type="text" name="productName" id="productName" value=""> 
+                 <input type="text" name="productName" id="productName" value="龙井"> 
 				 <font color="red"></font>
              </div>
              <div>
                  <label for="productUnit">商品单位：</label>
-                 <input type="text" name="productUnit" id="productUnit" value=""> 
+                 <input type="text" name="productUnit" id="productUnit" value="艺福堂"> 
 				 <font color="red"></font>
              </div>
              <div>
                  <label for="productCount">商品数量：</label>
-                 <input type="text" name="productCount" id="productCount" value=""> 
+                 <input type="text" name="productCount" id="productCount" value="30"> 
 				 <font color="red"></font>
              </div>
              <div>
                  <label for="totalPrice">总金额：</label>
-                 <input type="text" name="totalPrice" id="totalPrice" value=""> 
+                 <input type="text" name="totalPrice" id="totalPrice" value="1500"> 
 				 <font color="red"></font>
              </div>
              <div>

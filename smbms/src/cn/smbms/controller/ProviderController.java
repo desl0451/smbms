@@ -21,7 +21,7 @@ import cn.smbms.tools.PageSupport;
 @RequestMapping("/sys/provider")
 public class ProviderController {
 	private Logger logger = Logger.getLogger(UserController.class);
-	
+
 	@Resource
 	private ProviderService providerService;
 
@@ -89,9 +89,47 @@ public class ProviderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-	public String getProviderByID(Model model,@PathVariable Integer id) {
+	public String getProviderByID(Model model, @PathVariable Integer id) {
 		Provider provider = providerService.getProviderById(id);
 		model.addAttribute("provider", provider);
 		return "providerview";
+	}
+
+	/**
+	 * 修改供应商信息
+	 * 
+	 * @param model
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
+	public String modifyProvider(Model model, @PathVariable Integer id) {
+		Provider provider = providerService.getProviderById(id);
+		model.addAttribute("provider", provider);
+		return "providermodify";
+	}
+
+	/**
+	 * 跳转到添加页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/addProvider.html")
+	public String addProvider() {
+		return "provideradd";
+	}
+
+	/**
+	 * 添加供应商信息
+	 * 
+	 * @param provider
+	 * @return
+	 */
+	@RequestMapping(value = "/addsave.html", method = RequestMethod.POST)
+	public String addProviderSave(Provider provider) {
+		if (providerService.add(provider)) {
+			return "redirect:/sys/provider/list.html";
+		}
+		return "provideradd";
 	}
 }

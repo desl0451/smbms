@@ -44,7 +44,7 @@
               
               <div>
                   <label for="proDesc">描述：</label>
-                  <input type="text" name="proDesc" id="proDesc" value="${provider.proDesc }"> 
+                  <textarea rows="4" cols="60" name="proDesc" id="proDesc">${provider.proDesc }</textarea> 
               </div>
               <div class="providerAddBtn">
                   <input type="button" name="save" id="save" value="保存">

@@ -31,11 +31,16 @@ public interface BillMapper {
 			@Param("pageSize") Integer pageSize) throws Exception;
 
 	/**
-	 * 通过billId获取Bill
+	 * 通过billId获取订单信息
 	 * 
 	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
 	public Bill getBillById(@Param("id") Integer id);
+
+	/**
+	 * 保存订单信息
+	 */
+	public int save(@Param("bill") Bill bill);
 }

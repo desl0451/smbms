@@ -51,7 +51,7 @@ $(function(){
 	
 	$(".modifyProvider").on("click",function(){
 		var obj = $(this);
-		window.location.href=path+"/jsp/provider.do?method=modify&proid="+ obj.attr("proid");
+		window.location.href=path+"/sys/provider/modify/"+ obj.attr("proid");
 	});
 
 	$('#no').click(function () {

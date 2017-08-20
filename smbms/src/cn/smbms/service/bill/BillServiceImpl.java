@@ -39,4 +39,15 @@ public class BillServiceImpl implements BillService {
 		return billMapper.getBillById(id);
 	}
 
+	/**
+	 * 添加订单信息
+	 */
+	@Override
+	public boolean addBill(Bill bill) {
+		// TODO Auto-generated method stub
+		if (billMapper.save(bill) > 0) {
+			return true;
+		}
+		return false;
+	}
 }

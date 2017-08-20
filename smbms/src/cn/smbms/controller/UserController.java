@@ -37,6 +37,15 @@ public class UserController {
 	@Resource
 	private RoleService roleService;
 
+	/**
+	 * 显示全部用户列表
+	 * @param model
+	 * @param queryUserName
+	 * @param queryUserRole
+	 * @param pageIndex
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/list.html")
 	public String getUserList(Model model, @RequestParam(value = "queryname", required = false) String queryUserName,
 			@RequestParam(value = "queryUserRole", required = false) String queryUserRole,
@@ -101,8 +110,8 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/adduser.html", method = RequestMethod.GET)
-	public String useradd(@ModelAttribute("user") User user) {
+	@RequestMapping(value = "/useradd.html", method = RequestMethod.GET)
+	public String addUser(@ModelAttribute("user") User user) {
 		return "useradd";
 	}
 
@@ -165,8 +174,8 @@ public class UserController {
 		return "userview";
 	}
 
-	@RequestMapping(value = "/usermodify.html")
-	public String usermodify(Model model, @RequestParam(value = "uid", required = false) String id) throws Exception {
+	@RequestMapping(value = "/usermodify/{id}",method=RequestMethod.GET)
+	public String usermodify(Model model, @PathVariable String id) throws Exception {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
 		List<Role> roleList = null;

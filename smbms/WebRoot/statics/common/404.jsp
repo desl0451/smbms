@@ -6,6 +6,7 @@
 <body>
 <div>
   <img src="${pageContext.request.contextPath }/statics/common/image/404.jpg"/>
+  <a href="http://localhost:8080/smbms/">返回首页</a>
 </div>
 </body>
 </html>

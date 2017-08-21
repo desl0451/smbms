@@ -28,5 +28,10 @@ public interface RoleService {
 	 * @return
 	 */
 	public int getRoleCount() throws Exception;
+	
+	/**
+	 * 根据ID查询角色信息
+	 */
+	public Role getRoleById(Integer id);
 
 }

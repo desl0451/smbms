@@ -25,6 +25,44 @@ public class User {
 	private Integer age;// 年龄
 
 	private String userRoleName; // 用户角色名称
+	private String idPicPath; // 证件照路径
+
+	private String workPicPath; // 工作证照片路径
+
+	/**
+	 * @return the idPicPath
+	 */
+	public String getIdPicPath() {
+		return idPicPath;
+	}
+
+	/**
+	 * @param idPicPath the idPicPath to set
+	 */
+	public void setIdPicPath(String idPicPath) {
+		this.idPicPath = idPicPath;
+	}
+
+	/**
+	 * @return the workPicPath
+	 */
+	public String getWorkPicPath() {
+		return workPicPath;
+	}
+
+	/**
+	 * @param workPicPath the workPicPath to set
+	 */
+	public void setWorkPicPath(String workPicPath) {
+		this.workPicPath = workPicPath;
+	}
+
+	/**
+	 * @param age the age to set
+	 */
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
 	public String getUserRoleName() {
 		return userRoleName;

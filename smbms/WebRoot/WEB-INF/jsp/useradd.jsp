@@ -8,28 +8,28 @@
             <span>用户管理页面 >> 用户添加页面</span>
         </div>
         <div class="providerAdd">
-            <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/useraddsave.html" enctype="multipart/form-data">
+            <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/sys/user/addsave.html" enctype="multipart/form-data">
 				<input type="hidden" name="method" value="add">
                 <!--div的class 为error是验证错误，ok是验证成功-->
                 <div>
                     <label for="userCode">用户编码：</label>
-                    <input type="text" name="userCode" id="userCode" value=""> 
+                    <input type="text" name="userCode" id="userCode" value="admin3"> 
 					<!-- 放置提示信息 -->
 					<font color="red"></font>
                 </div>
                 <div>
                     <label for="userName">用户名称：</label>
-                    <input type="text" name="userName" id="userName" value=""> 
+                    <input type="text" name="userName" id="userName" value="desl0451"> 
 					<font color="red"></font>
                 </div>
                 <div>
                     <label for="userPassword">用户密码：</label>
-                    <input type="password" name="userPassword" id="userPassword" value=""> 
+                    <input type="password" name="userPassword" id="userPassword" value="1234567"> 
 					<font color="red"></font>
                 </div>
                 <div>
                     <label for="ruserPassword">确认密码：</label>
-                    <input type="password" name="ruserPassword" id="ruserPassword" value=""> 
+                    <input type="password" name="ruserPassword" id="ruserPassword" value="1234567"> 
 					<font color="red"></font>
                 </div>
                 <div>
@@ -47,12 +47,12 @@
                 </div>
                 <div>
                     <label for="phone">用户电话：</label>
-                    <input type="text" name="phone" id="phone" value=""> 
+                    <input type="text" name="phone" id="phone" value="13804578400"> 
 					<font color="red"></font>
                 </div>
                 <div>
                     <label for="address">用户地址：</label>
-                   <input name="address" id="address"  value="">
+                   <input name="address" id="address"  value="哈尔滨宏图小区">
                 </div>
                 <div>
                     <label >用户角色：</label>

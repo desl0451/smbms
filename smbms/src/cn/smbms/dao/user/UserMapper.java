@@ -73,7 +73,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int modify(User user) throws Exception;
+	public int modify(User user);
 
 	/**
 	 * 修改当前用户密码

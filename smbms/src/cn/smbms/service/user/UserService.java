@@ -72,8 +72,9 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	public boolean modify(User user) throws Exception;
+	public boolean modify(User user);
 
+	
 	/**
 	 * ¸ù¾İuserIdĞŞ¸ÄÃÜÂë
 	 * 

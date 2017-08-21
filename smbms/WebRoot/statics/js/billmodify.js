@@ -6,7 +6,7 @@ var totalPrice = null;
 var providerId = null;
 var saveBtn = null;
 var backBtn = null;
-
+var billObj;
 function priceReg (value){
 	value = value.replace(/[^\d.]/g,"");  //清除“数字”和“.”以外的字符
 		value = value.replace(/^\./g,"");  //验证第一个字符是数字而不是.
@@ -126,9 +126,8 @@ $(function(){
 		if(productName.attr("validateStatus") == "true" 
 			&& productUnit.attr("validateStatus") == "true" 
 			&& providerId.attr("validateStatus") == "true"){
-			if(confirm("是否确认提交数据")){
-				$("#billForm").submit();
-			}
+			changeDLGContent("你确定要添加订单吗？");
+			openYesOrNoDLG();
 		}
 	});
 	
@@ -144,4 +143,25 @@ $(function(){
 			history.back(-1);
 		}
 	});
+	$('#no').click(function () {
+		cancleBtn();
+	});
+	
+	$('#yes').click(function () {
+		$("#billForm").submit();
+	});
 });
+
+function openYesOrNoDLG(){
+	$('.zhezhao').css('display', 'block');
+	$('#removeBi').fadeIn();
+}
+
+function cancleBtn(){
+	$('.zhezhao').css('display', 'none');
+	$('#removeBi').fadeOut();
+}
+function changeDLGContent(contentStr){
+	var p = $(".removeMain").find("p");
+	p.html(contentStr);
+}

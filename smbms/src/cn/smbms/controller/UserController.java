@@ -1,5 +1,7 @@
 package cn.smbms.controller;
 
+import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.mysql.jdbc.StringUtils;
@@ -39,6 +44,7 @@ public class UserController {
 
 	/**
 	 * 显示全部用户列表
+	 * 
 	 * @param model
 	 * @param queryUserName
 	 * @param queryUserRole
@@ -158,6 +164,7 @@ public class UserController {
 		return JSONArray.toJSONString(resultMap);
 	}
 
+
 	/**
 	 * 显示用户信息页面跳转
 	 * 
@@ -174,7 +181,7 @@ public class UserController {
 		return "userview";
 	}
 
-	@RequestMapping(value = "/usermodify/{id}",method=RequestMethod.GET)
+	@RequestMapping(value = "/usermodify/{id}", method = RequestMethod.GET)
 	public String usermodify(Model model, @PathVariable String id) throws Exception {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
@@ -205,7 +212,8 @@ public class UserController {
 			else
 				resultMap.put("userCode", "noexist");
 		}
-		System.out.println("@###############################(" + JSONArray.toJSONString(resultMap) + ")##");
+		// System.out.println("@###############################(" +
+		// JSONArray.toJSONString(resultMap) + ")##");
 		return JSONArray.toJSONString(resultMap);
 	}
 
@@ -252,9 +260,9 @@ public class UserController {
 		return JSONArray.toJSONString(resultMap);
 	}
 
-	@RequestMapping(value = "/pwdsave.html")
+	@RequestMapping(value = "/pwdsave.html",method=RequestMethod.POST)
 	public String pwdSave(@RequestParam(value = "newpassword") String newPassword, HttpSession session,
-			HttpServletRequest request) {
+			HttpServletRequest request,Model model) {
 		boolean flag = false;
 		Object o = session.getAttribute(Constants.USER_SESSION);
 		if (o != null && !StringUtils.isNullOrEmpty(newPassword)) {
@@ -266,15 +274,18 @@ public class UserController {
 			}
 			if (flag) {
 				request.setAttribute(Constants.SYS_MESSAGE, "修改密码成功,请退出并使用新密码重新登录！");
+				model.addAttribute("message", "修改密码成功,请退出并使用新密码重新登录！");
 				session.removeAttribute(Constants.USER_SESSION);// session注销
 				return "login";
 			} else {
 				request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
+				model.addAttribute("message", "修改密码失败！");
 			}
 		} else {
 			request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
+			model.addAttribute("message", "修改密码失败！");
 		}
-		return "pwdmodify";
+		return "userlist";
 	}
 
 	@RequestMapping(value = "/view.html")
@@ -289,4 +300,78 @@ public class UserController {
 		}
 		return user;
 	}
+
+	@RequestMapping(value = "/addsave.html", method = RequestMethod.POST)
+	public String addUserSave(User user, HttpSession session, HttpServletRequest request,
+			@RequestParam(value = "attachs", required = false) MultipartFile[] attachs) {
+		String idPicPath = null;
+		String workPicPath = null;
+		String errorInfo = null;
+		boolean flag = true;
+		String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
+		logger.info("uploadFile path ============== > " + path);
+		for (int i = 0; i < attachs.length; i++) {
+			MultipartFile attach = attachs[i];
+			if (!attach.isEmpty()) {
+				if (i == 0) {
+					errorInfo = "uploadFileError";
+				} else if (i == 1) {
+					errorInfo = "uploadWpError";
+				}
+				String oldFileName = attach.getOriginalFilename();// 原文件名
+				logger.info("uploadFile oldFileName ============== > " + oldFileName);
+				String prefix = FilenameUtils.getExtension(oldFileName);// 原文件后缀
+				logger.debug("uploadFile prefix============> " + prefix);
+				int filesize = 500000;
+				logger.debug("uploadFile size============> " + attach.getSize());
+				if (attach.getSize() > filesize) {// 上传大小不得超过 500k
+					request.setAttribute(errorInfo, " * 上传大小不得超过 500k");
+					flag = false;
+				} else if (prefix.equalsIgnoreCase("jpg") || prefix.equalsIgnoreCase("png")
+						|| prefix.equalsIgnoreCase("jpeg") || prefix.equalsIgnoreCase("pneg")) {// 上传图片格式不正确
+					String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + "_Personal.jpg";
+					logger.debug("new fileName======== " + attach.getName());
+					File targetFile = new File(path, fileName);
+					if (!targetFile.exists()) {
+						targetFile.mkdirs();
+					}
+					// 保存
+					try {
+						attach.transferTo(targetFile);
+					} catch (Exception e) {
+						e.printStackTrace();
+						request.setAttribute(errorInfo, " * 上传失败！");
+						flag = false;
+					}
+					if (i == 0) {
+						idPicPath = path + File.separator + fileName;
+					} else if (i == 1) {
+						workPicPath = path + File.separator + fileName;
+					}
+					logger.debug("idPicPath: " + idPicPath);
+					logger.debug("workPicPath: " + workPicPath);
+
+				} else {
+					request.setAttribute(errorInfo, " * 上传图片格式不正确");
+					flag = false;
+				}
+			}
+		}
+		if (flag) {
+			user.setCreatedBy(((User) session.getAttribute(Constants.USER_SESSION)).getId());
+			user.setCreationDate(new Date());
+			user.setIdPicPath(idPicPath);
+			user.setWorkPicPath(workPicPath);
+			try {
+				if (userService.add(user)) {
+					return "redirect:/sys/user/list.html";
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "useradd";
+	}
+
 }

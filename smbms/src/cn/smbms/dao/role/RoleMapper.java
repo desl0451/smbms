@@ -26,4 +26,9 @@ public interface RoleMapper {
 	 * @throws Exception
 	 */
 	public int getRoleCount() throws Exception;
+
+	/**
+	 * 根据ID查询角色信息
+	 */
+	public Role getRoleById(@Param("id") Integer id);
 }

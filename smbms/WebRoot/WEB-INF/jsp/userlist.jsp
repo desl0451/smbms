@@ -76,9 +76,6 @@
 	          	<c:param name="totalPageCount" value="${totalPageCount}"/>
           	</c:import>
           <div class="providerAdd">
-        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/jsp/user.do">
-			<input type="hidden" name="method" value="modifyexe">
-			<input type="hidden" name="uid" value="${user.id }"/>
 			 <div>
                     <label for="userName">用户名称：</label>
                     <input type="text" name="userName" readonly id="userName" value="${user.userName }"> 
@@ -119,7 +116,6 @@
 					readonly="readonly" >					
         			<font color="red"></font>
                 </div>
-            </form>
         </div>
         </div>
        

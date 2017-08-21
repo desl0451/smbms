@@ -62,6 +62,17 @@
 
     </div>
 </section>
-
+<!--点击修改按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<div class="remove" id="removeBi">
+    <div class="removerChid">
+        <h2>提示</h2>
+        <div class="removeMain">
+            <p>你确定要添加该订单吗？</p>
+            <a href="#" id="yes">确定</a>
+            <a href="#" id="no">取消</a>
+        </div>
+    </div>
+</div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/billmodify.js"></script>

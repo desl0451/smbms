@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	 * modify User对象 修改
 	 */
 	@Override
-	public boolean modify(User user) throws Exception {
+	public boolean modify(User user) {
 		// TODO Auto-generated method stub
 		boolean bl = false;
 		int mid = userMapper.modify(user);
@@ -91,8 +91,8 @@ public class UserServiceImpl implements UserService {
 		return bl;
 	}
 
-	/*
-	 * 
+	/**
+	 * 修改用户密码
 	 */
 	@Override
 	public boolean updatePwd(Integer id, String pwd) throws Exception {

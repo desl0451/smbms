@@ -11,6 +11,7 @@ function deleteUser(obj){
 			if(data.delResult == "true"){//删除成功：移除删除行
 				cancleBtn();
 				obj.parents("tr").remove();
+				window.location.href=path+"/sys/user/list.html";
 			}else if(data.delResult == "false"){//删除失败
 				//alert("对不起，删除用户【"+obj.attr("username")+"】失败");
 				changeDLGContent("对不起，删除用户【"+obj.attr("username")+"】失败");

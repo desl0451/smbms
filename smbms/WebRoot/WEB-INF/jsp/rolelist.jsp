@@ -21,19 +21,11 @@
 							pattern="yyyy-MM-dd" />
 				</span></td>
 
-				<td><span><a class="viewUser"
-						href="userview.html?userid=${user.id }" userid=${user.id }
-						username=${user.userName }><img
-							src="${pageContext.request.contextPath }/statics/images/read.png"
-							alt="查看" title="查看" /></a></span> <span><a class="modifyUser"
-						href="usermodify.html?;" userid=${user.id }
-						username=${user.userName }><img
-							src="${pageContext.request.contextPath }/statics/images/xiugai.png"
-							alt="修改" title="修改" /></a></span> <span><a class="deleteUser"
-						href="userdel.html?userId=${user.id}" userid=${user.id }
-						username=${user.userName }><img
-							src="${pageContext.request.contextPath }/statics/images/schu.png"
-							alt="删除" title="删除" /></a></span></td>
+				<td>
+				<span><a class="viewUser" href="javascript:;" id=${role.id } roleName=${role.roleName }><img src="${pageContext.request.contextPath }/statics/images/read.png" alt="查看" title="查看"/></a></span>
+				<span><a class="modifyUser" href="javascript:;" id=${role.id } roleName=${role.roleName }><img src="${pageContext.request.contextPath }/statics/images/xiugai.png" alt="修改" title="修改"/></a></span>
+				<span><a class="deleteUser" href="javascript:;" id=${role.id } roleName=${role.roleName }><img src="${pageContext.request.contextPath }/statics/images/schu.png" alt="删除" title="删除"/></a></span>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -43,6 +35,25 @@
 		<c:param name="currentPageNo" value="${currentPageNo}" />
 		<c:param name="totalPageCount" value="${totalPageCount}" />
 	</c:import>
+	<div class="providerAdd">
+			   <div>
+                    <label for="roleCode">角色编码：</label>
+                    <input type="text" name="roleCode" readonly id="roleCode" value="${role.roleCode }"> 
+					<font color="red"></font>
+               </div>
+		       <div>
+                    <label for="roleName">角色名称：</label>
+                    <input type="text" name="roleName" id="roleName" readonly value="${role.roleName }"> 
+                    <font color="red"></font>
+               </div>
+                <div>
+                    <label >创建时间：</label>
+					<input type="text"  id="creationDate" readonly name="creationDate" value="<fmt:formatDate
+					value="${role.creationDate}" pattern="yyyy-MM-dd" />"
+					readonly="readonly" >					
+        			<font color="red"></font>
+                </div>
+        </div>
 </div>
 </section>
 
@@ -60,4 +71,4 @@
 
 <%@include file="/WEB-INF/jsp/common/foot.jsp"%>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/statics/js/userlist.js"></script>
+	src="${pageContext.request.contextPath }/statics/js/rolelist.js"></script>

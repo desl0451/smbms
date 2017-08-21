@@ -13,4 +13,10 @@
 	<select id="getRoleListAll" resultType="role">
 		select id, roleCode,roleName,creationDate from smbms_role
 	</select>
+	
+	
+	<!-- 根据ID查询角色信息 -->
+	<select id="getRoleById" resultType="role">
+		SELECT * FROM smbms.smbms_role  WHERE id=#{id}		
+	</select>
 </mapper>

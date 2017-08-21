@@ -36,4 +36,13 @@ public class RoleServiceImpl implements RoleService {
 		return roleMapper.getRoleCount();
 	}
 
+
+	/**
+	 * 根据ID查询角色信息
+	 */
+	@Override
+	public Role getRoleById(Integer id) {
+		// TODO Auto-generated method stub
+		return roleMapper.getRoleById(id);
+	}
 }

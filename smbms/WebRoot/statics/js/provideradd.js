@@ -4,7 +4,7 @@ var proContact = null;
 var proPhone = null;
 var addBtn = null;
 var backBtn = null;
-
+var providerObj;
 $(function(){
 	proCode = $("#proCode");
 	proName = $("#proName");
@@ -77,9 +77,8 @@ $(function(){
 		}else if(proPhone.attr("validateStatus") != "true"){
 			proPhone.blur();
 		}else{
-			if(confirm("是否确认提交数据")){
-				$("#providerForm").submit();
-			}
+			changeDLGContent("是否确认提交数据?");
+			openYesOrNoDLG();
 		}
 	});
 	
@@ -94,4 +93,26 @@ $(function(){
 			history.back(-1);
 		}
 	});
+	
+	$('#no').click(function () {
+		cancleBtn();
+	});
+	
+	$('#yes').click(function () {
+		$("#providerForm").submit();
+	});
 });
+
+function openYesOrNoDLG(){
+	$('.zhezhao').css('display', 'block');
+	$('#removeProv').fadeIn();
+}
+
+function cancleBtn(){
+	$('.zhezhao').css('display', 'none');
+	$('#removeProv').fadeOut();
+}
+function changeDLGContent(contentStr){
+	var p = $(".removeMain").find("p");
+	p.html(contentStr);
+}

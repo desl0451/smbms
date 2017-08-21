@@ -5,6 +5,9 @@ import java.util.List;
 import cn.smbms.pojo.Provider;
 
 public interface ProviderService {
+	/***********************************************************/
+	/* 查询 */
+	/***********************************************************/
 	/**
 	 * 根据条件查询供应商列表
 	 * 
@@ -28,14 +31,23 @@ public interface ProviderService {
 	 * 查询所有供应商记录
 	 */
 	public List<Provider> getProviderAll();
-	
+
 	/**
 	 * 根据ID提取供应商信息
 	 */
 	public Provider getProviderById(Integer id);
+
 	
+	/****************************************************************/
+	/* 添加修改删除 */
+	/****************************************************************/
 	/**
 	 * 保存供应商信息
 	 */
 	public boolean add(Provider provider);
+
+	/**
+	 * 删除供应商信息
+	 */
+	public boolean delete(Integer id);
 }

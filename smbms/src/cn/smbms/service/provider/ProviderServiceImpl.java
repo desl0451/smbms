@@ -15,6 +15,9 @@ public class ProviderServiceImpl implements ProviderService {
 	@Resource
 	private ProviderMapper providerMapper;
 
+	/**
+	 * 查询供应商列表
+	 */
 	@Override
 	public List<Provider> getProviderList(String queryProCode, String queryProName, Integer currentPageNo,
 			Integer pageSize) throws Exception {
@@ -23,6 +26,9 @@ public class ProviderServiceImpl implements ProviderService {
 		return providerMapper.getProviderList(queryProCode, queryProName, currentPageNo, pageSize);
 	}
 
+	/**
+	 * 返回记录数量
+	 */
 	@Override
 	public int getProviderCount(String queryProCode, String queryProName) throws Exception {
 		// TODO Auto-generated method stub
@@ -53,9 +59,22 @@ public class ProviderServiceImpl implements ProviderService {
 	@Override
 	public boolean add(Provider provider) {
 		// TODO Auto-generated method stub
-		if (providerMapper.save(provider) > 0) {
+		if (providerMapper.insert(provider) > 0) {
 			return true;
 		}
 		return false;
 	}
+
+	/**
+	 * 删除供应商信息
+	 */
+	@Override
+	public boolean delete(Integer id) {
+		// TODO Auto-generated method stub
+		if (providerMapper.delete(id) > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

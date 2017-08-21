@@ -38,5 +38,10 @@ public interface ProviderMapper {
 	/**
 	 * 添加供应商
 	 */
-	public int save(@Param("provider") Provider provider);
+	public int insert(@Param("provider") Provider provider);
+
+	/**
+	 * 删除供应商
+	 */
+	public int delete(@Param("id") Integer id);
 }

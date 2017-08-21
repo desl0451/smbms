@@ -4,19 +4,22 @@ var providerObj;
 function deleteProvider(obj){
 	$.ajax({
 		type:"GET",
-		url:path+"/jsp/provider.do",
-		data:{method:"delprovider",proid:obj.attr("proid")},
+		url:path+"/sys/provider/delete/deleteprovider.json",
+		data:{proid:obj.attr("proid")},
 		dataType:"json",
 		success:function(data){
 			if(data.delResult == "true"){//删除成功：移除删除行
 				cancleBtn();
 				obj.parents("tr").remove();
+				window.location.href=path+"/sys/provider/list.html";
 			}else if(data.delResult == "false"){//删除失败
 				//alert("对不起，删除供应商【"+obj.attr("proname")+"】失败");
 				changeDLGContent("对不起，删除供应商【"+obj.attr("proname")+"】失败");
 			}else if(data.delResult == "notexist"){
 				//alert("对不起，供应商【"+obj.attr("proname")+"】不存在");
 				changeDLGContent("对不起，供应商【"+obj.attr("proname")+"】不存在");
+			}else if(data.delResult=="null"){
+				changeDLGContent("对不起，编号不能为空");
 			}else{
 				//alert("对不起，该供应商【"+obj.attr("proname")+"】下有【"+data.delResult+"】条订单，不能删除");
 				changeDLGContent("对不起，该供应商【"+obj.attr("proname")+"】下有【"+data.delResult+"】条订单，不能删除");

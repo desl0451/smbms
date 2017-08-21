@@ -51,8 +51,13 @@
 	</select>
 	
 	<!-- 保存供应商信息 -->
-	<insert id="save" parameterType="provider">
-		INSERT INTO smbms.smbms_provider (proCode,proName,proContact,proPhone,proAddress,proFax,proDesc)
-		VALUES(#{proCode}, #{proName}, #{proContact}, #{proPhone}, #{proAddress}, #{proFax},#{proDesc})
+	<insert id="insert" parameterType="provider">
+		INSERT INTO smbms.smbms_provider (proCode,proName,proContact,proPhone,proAddress,proFax,proDesc,createdBy,creationDate)
+		VALUES(#{provider.proCode}, #{provider.proName}, #{provider.proContact}, #{provider.proPhone}, #{provider.proAddress}, #{provider.proFax},#{provider.proDesc},#{provider.createdBy},#{provider.creationDate})
 	</insert>
+	
+	<!-- 删除供应商信息 -->
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM smbms_provider WHERE id=#{id}
+	</delete>
 </mapper>

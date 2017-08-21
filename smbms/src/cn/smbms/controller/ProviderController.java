@@ -1,8 +1,11 @@
 package cn.smbms.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONArray;
+import com.mysql.jdbc.StringUtils;
 
 import cn.smbms.pojo.Provider;
 import cn.smbms.service.provider.ProviderService;
@@ -125,6 +132,9 @@ public class ProviderController {
 		return "providermodify";
 	}
 
+	/*********************************************************************/
+	/* ######添加开始###### */
+	/*********************************************************************/
 	/**
 	 * 跳转到添加页面
 	 * 
@@ -142,10 +152,41 @@ public class ProviderController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addsave.html", method = RequestMethod.POST)
-	public String addProviderSave(Provider provider) {
+	public String addProviderSave(Provider provider, HttpSession session) {
+		provider.setCreationDate(new Date());
+		provider.setCreatedBy(1);
 		if (providerService.add(provider)) {
 			return "redirect:/sys/provider/list.html";
 		}
 		return "provideradd";
+	}
+	/*********************************************************************/
+	/* ######添加结束###### */
+	/*********************************************************************/
+
+	/*********************************************************************/
+	/* ######删除开始###### */
+	/*********************************************************************/
+	/**
+	 * 删除供应商信息
+	 */
+	@RequestMapping(value = "/delete/deleteprovider.json", method = RequestMethod.GET)
+	@ResponseBody
+	public Object deleteProvider(@RequestParam String proid) {
+		logger.debug("deleteProvider proid===================== " + proid);
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		if (StringUtils.isNullOrEmpty(proid)) {
+			hashMap.put("delResult", "null");
+		} else {
+			Provider provider = providerService.getProviderById(Integer.parseInt(proid));
+			if (provider == null) {
+				hashMap.put("delResult", "notexist");
+			} else {
+				if (providerService.delete(Integer.parseInt(proid))) {
+					hashMap.put("delResult", "true");
+				}
+			}
+		}
+		return JSONArray.toJSONString(hashMap);
 	}
 }

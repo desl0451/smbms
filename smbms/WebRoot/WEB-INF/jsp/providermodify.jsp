@@ -8,7 +8,8 @@
           <span>供应商管理页面 >> 供应商修改页</span>
       </div>
       <div class="providerAdd">
-          <form id="providerForm" name="providerForm" method="post" action="${pageContext.request.contextPath }/jsp/provider.do">
+          <form id="providerForm" name="providerForm" method="post" action="${pageContext.request.contextPath }/sys/provider/modifysave.html">
+          	  <input type="hidden" name="id" value="${provider.id }">
               <!--div的class 为error是验证错误，ok是验证成功-->
               <div class="">
                   <label for="proCode">供应商编码：</label>
@@ -54,5 +55,17 @@
       </div>
   </div>
 </section>
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<div class="remove" id="removeBi">
+    <div class="removerChid">
+        <h2>提示</h2>
+        <div class="removeMain">
+            <p>你确定要保存修改信息吗？</p>
+            <a href="#" id="yes">确定</a>
+            <a href="#" id="no">取消</a>
+        </div>
+    </div>
+</div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/providermodify.js"></script>

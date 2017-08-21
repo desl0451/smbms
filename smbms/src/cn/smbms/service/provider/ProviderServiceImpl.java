@@ -64,6 +64,17 @@ public class ProviderServiceImpl implements ProviderService {
 		}
 		return false;
 	}
+	/**
+	 * 修改供应商信息
+	 */
+	@Override
+	public boolean update(Provider provider) {
+		// TODO Auto-generated method stub
+		if (providerMapper.update(provider) > 0) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * 删除供应商信息

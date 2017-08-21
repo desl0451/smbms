@@ -55,7 +55,11 @@
 		INSERT INTO smbms.smbms_provider (proCode,proName,proContact,proPhone,proAddress,proFax,proDesc,createdBy,creationDate)
 		VALUES(#{provider.proCode}, #{provider.proName}, #{provider.proContact}, #{provider.proPhone}, #{provider.proAddress}, #{provider.proFax},#{provider.proDesc},#{provider.createdBy},#{provider.creationDate})
 	</insert>
-	
+	<!-- 修改供应商信息 -->
+	<update id="update" parameterType="provider">
+		UPDATE smbms.smbms_provider SET	proCode = #{provider.proCode} , proName = #{provider.proName} , proDesc = #{provider.proDesc} , proContact = #{provider.proContact} , proPhone = #{provider.proPhone} , proAddress = #{provider.proAddress} , proFax = #{provider.proFax} , createdBy = #{provider.createdBy}, 	creationDate =#{provider.creationDate} , modifyDate = #{provider.modifyDate} , modifyBy = #{provider.modifyBy} 
+		WHERE id = #{provider.id}
+	</update>
 	<!-- 删除供应商信息 -->
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM smbms_provider WHERE id=#{id}

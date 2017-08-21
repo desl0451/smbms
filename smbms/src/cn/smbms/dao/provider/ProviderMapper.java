@@ -41,6 +41,11 @@ public interface ProviderMapper {
 	public int insert(@Param("provider") Provider provider);
 
 	/**
+	 * 修改供应商
+	 */
+	public int update(@Param("provider") Provider provider);
+
+	/**
 	 * 删除供应商
 	 */
 	public int delete(@Param("id") Integer id);

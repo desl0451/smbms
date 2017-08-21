@@ -2,7 +2,7 @@ var oldpassword = null;
 var newpassword = null;
 var rnewpassword = null;
 var saveBtn = null;
-
+var billObj;
 $(function(){
 	oldpassword = $("#oldpassword");
 	newpassword = $("#newpassword");
@@ -72,10 +72,31 @@ $(function(){
 		if(oldpassword.attr("validateStatus") == "true" 
 			&& newpassword.attr("validateStatus") == "true"
 			&& rnewpassword.attr("validateStatus") == "true"){
-			if(confirm("确定要修改密码？")){
-				$("#userForm").submit();
-			}
+			changeDLGContent("你确定要添加订单吗？");
+			openYesOrNoDLG();
+				
 		}
 		
 	});
+	$('#no').click(function () {
+		cancleBtn();
+	});
+	
+	$('#yes').click(function () {
+		$("#billForm").submit();
+	});
 });
+
+function openYesOrNoDLG(){
+	$('.zhezhao').css('display', 'block');
+	$('#removeBi').fadeIn();
+}
+
+function cancleBtn(){
+	$('.zhezhao').css('display', 'none');
+	$('#removeBi').fadeOut();
+}
+function changeDLGContent(contentStr){
+	var p = $(".removeMain").find("p");
+	p.html(contentStr);
+}

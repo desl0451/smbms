@@ -37,7 +37,6 @@ public interface ProviderService {
 	 */
 	public Provider getProviderById(Integer id);
 
-	
 	/****************************************************************/
 	/* 添加修改删除 */
 	/****************************************************************/
@@ -45,6 +44,12 @@ public interface ProviderService {
 	 * 保存供应商信息
 	 */
 	public boolean add(Provider provider);
+	/**
+	 * 修改供应商信息
+	 * @param provider
+	 * @return
+	 */
+	public boolean update(Provider provider);
 
 	/**
 	 * 删除供应商信息

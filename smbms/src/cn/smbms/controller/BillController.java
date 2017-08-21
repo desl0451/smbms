@@ -2,24 +2,25 @@ package cn.smbms.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
+import com.mysql.jdbc.StringUtils;
+
 import cn.smbms.pojo.Bill;
 import cn.smbms.pojo.Provider;
-import cn.smbms.pojo.User;
 import cn.smbms.service.bill.BillService;
 import cn.smbms.service.provider.ProviderService;
 import cn.smbms.tools.Constants;
@@ -120,7 +121,6 @@ public class BillController {
 	@RequestMapping(value = "/modify/{id}", method = RequestMethod.GET)
 	public String modify(Model model, @PathVariable Integer id) {
 		Bill bill = billService.getBillById(id);
-
 		model.addAttribute("bill", bill);
 		return "billmodify";
 	}
@@ -141,9 +141,14 @@ public class BillController {
 	/**
 	 * 修改面页-》保存Bill信息
 	 */
-	@RequestMapping(value = "/modify/save/", method = RequestMethod.POST)
-	public String modifysave(Model model) {
-		return "";
+	@RequestMapping(value = "/modifysave.html", method = RequestMethod.POST)
+	public String modifysave(Bill bill) {
+		bill.setCreatedBy(1);
+		bill.setCreationDate(new Date());
+		if (billService.updateBill(bill)) {
+			return "redirect:/sys/bill/list.html";
+		}
+		return "redirect:/sys/bill/list.html";
 	}
 
 	/**
@@ -157,13 +162,33 @@ public class BillController {
 	/**
 	 * 保存订单
 	 */
-	@RequestMapping(value = "/save.html", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert.html", method = RequestMethod.POST)
 	public String billSave(Bill bill) {
+		bill.setCreatedBy(1);
 		bill.setCreationDate(new Date());
-		if(billService.addBill(bill)){
-			return "redirect:/user/list.html";
+		if (billService.addBill(bill)) {
+			return "redirect:/sys/bill/list.html";
 		}
 		return "billadd";
 	}
 
+	/**
+	 * 删除订单
+	 */
+	@RequestMapping(value = "/delete/deleteprovider.json", method = RequestMethod.GET)
+	@ResponseBody
+	public String billDelete(@RequestParam String billid) {
+		logger.debug("billController id====================" + billid);
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		if (StringUtils.isNullOrEmpty(billid)) {
+			hashMap.put("delResult", "notexist");
+		} else {
+			if (billService.deleteBill(Integer.parseInt(billid))) {
+				hashMap.put("delResult", "true");
+			} else {
+				hashMap.put("delResult", "false");
+			}
+		}
+		return JSONArray.toJSONString(hashMap);
+	}
 }

@@ -40,7 +40,17 @@ public interface BillMapper {
 	public Bill getBillById(@Param("id") Integer id);
 
 	/**
-	 * 保存订单信息
+	 * 添加订单信息
 	 */
-	public int save(@Param("bill") Bill bill);
+	public int insert(@Param("bill") Bill bill);
+
+	/**
+	 * 修改订单信息
+	 */
+	public int update(@Param("bill") Bill bill);
+
+	/**
+	 * 删除订单信息
+	 */
+	public int delete(@Param("id") Integer id);
 }

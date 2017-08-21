@@ -2,7 +2,7 @@ var proContact = null;
 var proPhone = null;
 var saveBtn = null;
 var backBtn = null;
-
+var billObj;
 $(function(){
 	proContact = $("#proContact");
 	proPhone = $("#proPhone");
@@ -45,9 +45,8 @@ $(function(){
 		proPhone.blur();
 		if(proContact.attr("validateStatus") == "true" && 
 				proPhone.attr("validateStatus") == "true"){
-			if(confirm("是否确认提交数据")){
-				$("#providerForm").submit();
-			}
+			changeDLGContent("是否确认提交数据？");
+			openYesOrNoDLG();
 		}
 	});
 	
@@ -63,4 +62,25 @@ $(function(){
 			history.back(-1);
 		}
 	});
+	$('#no').click(function () {
+		cancleBtn();
+	});
+	
+	$('#yes').click(function () {
+		$("#providerForm").submit();
+	});
 });
+
+function openYesOrNoDLG(){
+	$('.zhezhao').css('display', 'block');
+	$('#removeBi').fadeIn();
+}
+
+function cancleBtn(){
+	$('.zhezhao').css('display', 'none');
+	$('#removeBi').fadeOut();
+}
+function changeDLGContent(contentStr){
+	var p = $(".removeMain").find("p");
+	p.html(contentStr);
+}

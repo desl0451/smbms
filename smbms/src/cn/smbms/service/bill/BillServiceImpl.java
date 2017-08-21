@@ -45,9 +45,34 @@ public class BillServiceImpl implements BillService {
 	@Override
 	public boolean addBill(Bill bill) {
 		// TODO Auto-generated method stub
-		if (billMapper.save(bill) > 0) {
+		if (billMapper.insert(bill) > 0) {
 			return true;
 		}
 		return false;
 	}
+
+	/**
+	 * 修改订单信息
+	 */
+	@Override
+	public boolean updateBill(Bill bill) {
+		// TODO Auto-generated method stub
+		if (billMapper.update(bill) > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 删除订单信息
+	 */
+	@Override
+	public boolean deleteBill(Integer id) {
+		// TODO Auto-generated method stub
+		if (billMapper.delete(id) > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

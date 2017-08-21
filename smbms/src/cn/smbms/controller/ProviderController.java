@@ -160,9 +160,19 @@ public class ProviderController {
 		}
 		return "provideradd";
 	}
+
 	/*********************************************************************/
 	/* ######添加结束###### */
 	/*********************************************************************/
+	@RequestMapping(value = "/modifysave.html", method = RequestMethod.POST)
+	public String modifyssave(Provider provider) {
+		provider.setCreatedBy(1);
+		provider.setCreationDate(new Date());
+		if (providerService.update(provider)) {
+			return "redirect:/sys/provider/list.html";
+		}
+		return "redirect:/sys/provider/list.html";
+	}
 
 	/*********************************************************************/
 	/* ######删除开始###### */

@@ -24,4 +24,14 @@ public interface BillService {
 	 * Ìí¼Ó¶©µ¥
 	 */
 	public boolean addBill(Bill bill);
+
+	/**
+	 * ÐÞ¸Ä¶©µ¥
+	 */
+	public boolean updateBill(Bill bill);
+
+	/**
+	 * É¾³ý¶©µ¥
+	 */
+	public boolean deleteBill(Integer id);
 }

@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean add(User user) throws Exception {
 		boolean bl = false;
-		int id = userMapper.add(user);
+		int id = userMapper.insert(user);
 		if (id > 0) {
 			bl = true;
 		}
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean deleteUserById(Integer delId) {
 		boolean bl = false;
-		int did = userMapper.deleteUserById(delId);
+		int did = userMapper.delete(delId);
 		if (did > 0) {
 			bl = true;
 		}
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 	public boolean modify(User user) {
 		// TODO Auto-generated method stub
 		boolean bl = false;
-		int mid = userMapper.modify(user);
+		int mid = userMapper.update(user);
 		if (mid > 0) {
 			bl = true;
 		}

@@ -51,7 +51,7 @@
 	</select>
 
 	<!-- 根据ID删除用户对象 -->
-	<delete id="deleteUserById">
+	<delete id="delete">
 		delete from smbms_user where id=#{id}
 	</delete>
 	
@@ -60,4 +60,11 @@
 	    update smbms_user set userPassword=#{userPassword}
 	    where id=#{id}
 	</update>
+	
+	<!-- 添加用户 -->
+	<insert id="insert" parameterType="user">
+		INSERT INTO smbms.smbms_user (userCode, 	userName, userPassword, gender, birthday, phone, address, userRole, createdBy, creationDate, modifyBy, modifyDate, idPicPath, workPicPath)VALUES( #{user.userCode}, #{user.userName}, #{user.userPassword}, #{user.gender}, #{user.birthday}, #{user.phone}, #{user.address}, #{user.userRole}, #{user.createdBy}, #{user.creationDate}, #{user.modifyBy}, #{user.modifyDate}, #{user.idPicPath}, #{user.workPicPath})
+	</insert>
+	
+	
 </mapper>

@@ -23,7 +23,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int add(User user) throws Exception;
+	public int insert(@Param("user") User user) throws Exception;
 
 	/**
 	 * 通过条件查询-userList
@@ -55,7 +55,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int deleteUserById(@Param("id") Integer id);
+	public int delete(@Param("id") Integer id);
 
 	/**
 	 * 通过userId获取user
@@ -73,7 +73,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int modify(User user);
+	public int update(@Param("user") User user);
 
 	/**
 	 * 修改当前用户密码

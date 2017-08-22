@@ -116,6 +116,12 @@
 					readonly="readonly" >					
         			<font color="red"></font>
                 </div>
+                <div>
+                   <img src="${user.idPicPath}" height="180" width="140"/>
+                </div>
+                <div>
+                   <img src="${user.workPicPath}" height="180" width="140"/>
+                </div>
         </div>
         </div>
        

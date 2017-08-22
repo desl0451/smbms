@@ -117,11 +117,13 @@
         			<font color="red"></font>
                 </div>
                 <div>
-                   <img src="${user.idPicPath}" height="180" width="140"/>
-                </div>
-                <div>
-                   <img src="${user.workPicPath}" height="180" width="140"/>
-                </div>
+	              	 <label>个人证件照：</label>
+		             <img id="idPicPath" src="${pageContext.request.contextPath }/statics/images/wu.jpg" width="360" height="200"/>
+	            </div>            
+	            <div>
+	            	 <label>工作证照片：</label>
+		             <img id="workPicPath" src="${pageContext.request.contextPath }/statics/images/wu.jpg" width="570" height="332"/>
+	            </div>
         </div>
         </div>
        

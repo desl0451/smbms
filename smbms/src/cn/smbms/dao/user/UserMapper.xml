@@ -43,7 +43,7 @@
 	<select id="getUserById" resultType="User">
 		select
 		u.id,u.userCode,u.userName,u.userPassword,u.gender,u.birthday,u.phone,u.address,u.userRole,u.createdBy,r.roleName
-		as userRoleName,u.creationDate from smbms_user u,smbms_role r where u.userRole
+		as userRoleName,u.creationDate,u.idPicPath,u.workPicPath from smbms_user u,smbms_role r where u.userRole
 		= r.id
 		<if test="id!=null">
 			and u.id=#{id}

@@ -164,7 +164,6 @@ public class UserController {
 		return JSONArray.toJSONString(resultMap);
 	}
 
-
 	/**
 	 * 显示用户信息页面跳转
 	 * 
@@ -260,9 +259,9 @@ public class UserController {
 		return JSONArray.toJSONString(resultMap);
 	}
 
-	@RequestMapping(value = "/pwdsave.html",method=RequestMethod.POST)
+	@RequestMapping(value = "/pwdsave.html", method = RequestMethod.POST)
 	public String pwdSave(@RequestParam(value = "newpassword") String newPassword, HttpSession session,
-			HttpServletRequest request,Model model) {
+			HttpServletRequest request, Model model) {
 		boolean flag = false;
 		Object o = session.getAttribute(Constants.USER_SESSION);
 		if (o != null && !StringUtils.isNullOrEmpty(newPassword)) {
@@ -309,6 +308,9 @@ public class UserController {
 		String errorInfo = null;
 		boolean flag = true;
 		String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
+		String path2 = "smbms" + File.separator + "statics" + File.separator + "uploadfiles";
+		logger.debug("path====================" + path);
+		logger.debug("path====================" + path2);
 		logger.info("uploadFile path ============== > " + path);
 		for (int i = 0; i < attachs.length; i++) {
 			MultipartFile attach = attachs[i];
@@ -344,9 +346,11 @@ public class UserController {
 						flag = false;
 					}
 					if (i == 0) {
-						idPicPath = path + File.separator + fileName;
+
+						idPicPath =File.separator+ path2 + File.separator + fileName;
+
 					} else if (i == 1) {
-						workPicPath = path + File.separator + fileName;
+						workPicPath = File.separator+path2 + File.separator + fileName;
 					}
 					logger.debug("idPicPath: " + idPicPath);
 					logger.debug("workPicPath: " + workPicPath);

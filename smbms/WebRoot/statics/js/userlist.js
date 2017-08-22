@@ -75,6 +75,9 @@ $(function(){
 						$("#address").val(result.address);
 						$("#userRole").val(result.userRoleName);
 						$("#creationDate").val(result.creationDate);
+						$("#idPicPath").attr('src',result.idPicPath); 
+						$("#workPicPath").attr('src',result.workPicPath); 
+						$("#idPicPatha").val(result.idPicPath);
 					}
 				},
 				error:function(data){

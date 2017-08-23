@@ -18,11 +18,11 @@ $(function() {
 			data : {roleCode : roleCode.val()},
 			dataType : "json",
 			success : function(data) {
-				if (data.result == "true") { //旧密码正确
+				if (data.roleCode == "true") { //旧密码正确
 					validateTip(roleCode.next(), {"color" : "green"}, imgYes, true);
-				} else if (data.result == "false") { //旧密码输入不正确
+				} else if (data.roleCode == "false") { //旧密码输入不正确
 					validateTip(roleCode.next(), {"color" : "red"}, imgNo + " 角色编码已存在", false);
-				} else if (data.result == "error") { //旧密码输入为空
+				} else if (data.roleCode == "error") { //旧密码输入为空
 					validateTip(roleCode.next(), {"color" : "red"}, imgNo + " 角色编码错误", false);
 				}
 			},
@@ -36,12 +36,12 @@ $(function() {
 	});
 
 	roleName.on("focus", function() {
-		validateTip(roleName.next(), {"color" : "#666666"}, "* 角色名必须大于6小于20", false);
+		validateTip(roleName.next(), {"color" : "#666666"}, "* 角色名必须大于2小于20", false);
 	}).on("blur", function() {
-		if (roleName.val() != null && roleName.val().length > 6 && roleName.val().length < 20) {
-			validateTip(newpassword.next(), {"color" : "green"}, imgYes, true);
+		if (roleName.val() != null && roleName.val().length >=2 && roleName.val().length < 20) {
+			validateTip(roleName.next(), {"color" : "green"}, imgYes, true);
 		} else {
-			validateTip(newpassword.next(), {"color" : "red"}, imgNo + " 角色名不符合规范，请重新输入", false);
+			validateTip(roleName.next(), {"color" : "red"}, imgNo + " 角色名不符合规范，请重新输入", false);
 		}
 	});
 
@@ -73,7 +73,7 @@ $(function() {
 	});
 
 	$('#yes').click(function() {
-		$("#userForm").submit();
+		$("#roleForm").submit();
 	});
 });
 

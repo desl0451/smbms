@@ -74,7 +74,6 @@ public interface UserService {
 	 */
 	public boolean modify(User user);
 
-	
 	/**
 	 * ¸ù¾İuserIdĞŞ¸ÄÃÜÂë
 	 * 
@@ -83,4 +82,5 @@ public interface UserService {
 	 * @return
 	 */
 	public boolean updatePwd(Integer id, String pwd) throws Exception;
+
 }

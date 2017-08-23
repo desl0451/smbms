@@ -20,7 +20,20 @@
 		SELECT * FROM smbms.smbms_role  WHERE id=#{id}		
 	</select>
 	<!-- 根据roleCode查询用户对象 -->
-	<select id="selectRoleByCode" resultType="Role">
-			SELECT * FROM smbms.smbms_role  WHERE roleCode=#{roleCode}		 
+	<select id="selectRoleByCode" resultType="role">
+		SELECT * FROM smbms.smbms_role
+		<trim prefix="where" prefixOverrides="and | or">
+		<if test="roleCode != null">
+			and roleCode=#{roleCode}		
+		</if>
+		</trim>
 	</select>
+	
+	
+	<!-- 添加角色信息 -->
+	<insert id="insert" parameterType="role">
+		INSERT INTO smbms.smbms_role 
+		(roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
+		VALUES(#{role.roleCode}, #{role.roleName}, #{role.createdBy}, #{role.creationDate}, #{role.modifyBy}, #{role.modifyDate})
+	</insert>
 </mapper>

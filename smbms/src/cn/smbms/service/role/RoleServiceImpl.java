@@ -53,4 +53,17 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		return roleMapper.getRoleById(id);
 	}
+
+	/**
+	 * 添加角色信息
+	 */
+	@Override
+	public boolean insertRole(Role role) {
+		// TODO Auto-generated method stub
+		if (roleMapper.insert(role) > 0) {
+			return true;
+		}
+		return false;
+	}
+
 }

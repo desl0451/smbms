@@ -42,4 +42,12 @@ public interface RoleService {
 	 * @return
 	 */
 	public Role selectRoleCodeExist(String roleCode);
+	
+	/**
+	 * 添加角色信息
+	 * 
+	 * @param role
+	 * @return
+	 */
+	public boolean insertRole(Role role);
 }

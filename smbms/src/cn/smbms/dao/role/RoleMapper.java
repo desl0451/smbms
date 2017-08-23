@@ -40,4 +40,11 @@ public interface RoleMapper {
 	 * 根据roleCode查询角色信息
 	 */
 	public Role selectRoleByCode(@Param("roleCode")String roleCode);
+	
+	/**
+	 * 添加角色信息
+	 * @param role
+	 * @return
+	 */
+	public int insert(@Param("role")Role role);
 }

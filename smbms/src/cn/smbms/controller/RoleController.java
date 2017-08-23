@@ -1,5 +1,6 @@
 package cn.smbms.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -114,13 +115,26 @@ public class RoleController {
 		if (StringUtils.isNullOrEmpty(roleCode)) {
 			hashMap.put("roleCode", "null");
 		} else {
-			if(roleService.selectRoleCodeExist(roleCode)!=null){
-				hashMap.put("roleCode", "true");
-			}else{
+			Role role = roleService.selectRoleCodeExist(roleCode);
+			if (role != null) {
 				hashMap.put("roleCode", "error");
+			} else {
+				hashMap.put("roleCode", "true");
 			}
 		}
 		return JSONArray.toJSONString(hashMap);
 	}
 
+	/**
+	 * 
+	 */
+	@RequestMapping(value = "/insert.html", method = RequestMethod.POST)
+	public String addRole(Role role) {
+		role.setCreatedBy(1);
+		role.setCreationDate(new Date());
+		if (roleService.insertRole(role)) {
+			return "redirect:/sys/role/list.html";
+		}
+		return "redirect:/sys/role/list.html";
+	}
 }

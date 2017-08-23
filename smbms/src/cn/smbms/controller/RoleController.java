@@ -64,7 +64,7 @@ public class RoleController {
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPageNo", currentPageNo);
-		return "rolelist";
+		return "role/rolelist";
 	}
 
 	@RequestMapping(value = "/syserror.html")

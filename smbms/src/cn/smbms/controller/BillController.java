@@ -29,14 +29,31 @@ import cn.smbms.tools.PageSupport;
 @Controller
 @RequestMapping("/sys/bill")
 public class BillController {
-
+	/**
+	 * 日志对象
+	 */
 	private Logger logger = Logger.getLogger(BillController.class);
+	/**
+	 * 订单业务
+	 */
 	@Resource
 	private BillService billService;
-
+	
+	/**
+	 * 供应商业务
+	 */
 	@Resource
 	private ProviderService providerService;
-
+	/**
+	 * 显示全部订单
+	 * @param model
+	 * @param queryProductName
+	 * @param queryProviderId
+	 * @param queryIsPayment
+	 * @param pageIndex
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/list.html")
 	public String getBillList(Model model,
 			@RequestParam(value = "queryProductName", required = false) String queryProductName,
@@ -97,7 +114,7 @@ public class BillController {
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPageNo", currentPageNo);
-		return "billlist";
+		return "bill/billlist";
 	}
 
 	@RequestMapping(value = "/syserror.html")
@@ -112,7 +129,7 @@ public class BillController {
 	public String getBillById(Model model, @PathVariable Integer id) {
 		Bill bill = billService.getBillById(id);
 		model.addAttribute("bill", bill);
-		return "billview";
+		return "bill/billview";
 	}
 
 	/**
@@ -122,7 +139,7 @@ public class BillController {
 	public String modify(Model model, @PathVariable Integer id) {
 		Bill bill = billService.getBillById(id);
 		model.addAttribute("bill", bill);
-		return "billmodify";
+		return "bill/billmodify";
 	}
 
 	/**
@@ -156,7 +173,7 @@ public class BillController {
 	 */
 	@RequestMapping(value = "/addlist.html")
 	public String addbillpage() {
-		return "billadd";
+		return "bill/billadd";
 	}
 
 	/**
@@ -169,7 +186,7 @@ public class BillController {
 		if (billService.addBill(bill)) {
 			return "redirect:/sys/bill/list.html";
 		}
-		return "billadd";
+		return "bill/billadd";
 	}
 
 	/**

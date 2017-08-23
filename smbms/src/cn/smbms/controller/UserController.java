@@ -102,7 +102,7 @@ public class UserController {
 		model.addAttribute("totalPageCount", totalPageCount);
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPageNo", currentPageNo);
-		return "userlist";
+		return "user/userlist";
 	}
 
 	@RequestMapping(value = "/syserror.html")
@@ -118,52 +118,12 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/useradd.html", method = RequestMethod.GET)
 	public String addUser(@ModelAttribute("user") User user) {
-		return "useradd";
+		return "user/useradd";
 	}
 
-	/**
-	 * 跳转到pwdmodify.jsp页面
-	 * 
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/pwdmodify.html", method = RequestMethod.GET)
-	public String pwdmodify(HttpSession session) {
-		if (session.getAttribute(Constants.USER_SESSION) == null) {
-			return "redirect:/user/login.html";
-		}
-		return "pwdmodify";
-	}
+	
 
-	/**
-	 * pwdmodify.JSP页判断用户名是否正确
-	 * 
-	 * @param oldpassword
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/pwdmodify.json", method = RequestMethod.POST)
-	@ResponseBody
-	public Object getPwdByUserId(@RequestParam String oldpassword, HttpSession session) {
-		logger.debug("getPwdByUserId oldpassword ===================== " + oldpassword);
-		HashMap<String, String> resultMap = new HashMap<String, String>();
-
-		if (StringUtils.isNullOrEmpty(oldpassword)) {
-			resultMap.put("result", "error");
-		} else {
-			User user = (User) session.getAttribute(Constants.USER_SESSION);
-			if (user == null) {
-				resultMap.put("result", "sessionerror");
-			} else if (user.getUserPassword().equals(oldpassword)) {
-				resultMap.put("result", "true");
-			} else {
-				resultMap.put("result", "false");
-			}
-		}
-
-		return JSONArray.toJSONString(resultMap);
-	}
-
+	
 	/**
 	 * 显示用户信息页面跳转
 	 * 
@@ -177,7 +137,7 @@ public class UserController {
 		logger.debug("view id===================" + id);
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
-		return "userview";
+		return "user/userview";
 	}
 
 	@RequestMapping(value = "/usermodify/{id}", method = RequestMethod.GET)
@@ -187,7 +147,7 @@ public class UserController {
 		List<Role> roleList = null;
 		roleList = roleService.getRoleListAll();
 		model.addAttribute("roleList", roleList);
-		return "usermodify";
+		return "user/usermodify";
 
 	}
 
@@ -284,7 +244,7 @@ public class UserController {
 			request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
 			model.addAttribute("message", "修改密码失败！");
 		}
-		return "userlist";
+		return "user/userlist";
 	}
 
 	@RequestMapping(value = "/view.html")
@@ -375,7 +335,7 @@ public class UserController {
 				e.printStackTrace();
 			}
 		}
-		return "useradd";
+		return "user/useradd";
 	}
 
 }

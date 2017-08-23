@@ -91,7 +91,7 @@ public class ProviderController {
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("currentPageNo", currentPageNo);
 
-		return "providerlist";
+		return "provider/providerlist";
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class ProviderController {
 	public String getProviderByID(Model model, @PathVariable Integer id) {
 		Provider provider = providerService.getProviderById(id);
 		model.addAttribute("provider", provider);
-		return "providerview";
+		return "provider/providerview";
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class ProviderController {
 	public String modifyProvider(Model model, @PathVariable Integer id) {
 		Provider provider = providerService.getProviderById(id);
 		model.addAttribute("provider", provider);
-		return "providermodify";
+		return "provider/providermodify";
 	}
 
 	/*********************************************************************/
@@ -142,7 +142,7 @@ public class ProviderController {
 	 */
 	@RequestMapping(value = "/addProvider.html")
 	public String addProvider(@ModelAttribute("provider") Provider provider) {
-		return "provideradd";
+		return "provider/provideradd";
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class ProviderController {
 		if (providerService.add(provider)) {
 			return "redirect:/sys/provider/list.html";
 		}
-		return "provideradd";
+		return "provider/provideradd";
 	}
 
 	/*********************************************************************/

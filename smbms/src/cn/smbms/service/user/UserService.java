@@ -21,7 +21,7 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	public boolean add(User user) throws Exception;
+	public boolean addUser(User user) throws Exception;
 
 	/**
 	 * 根据条件查询用户列表

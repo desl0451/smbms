@@ -49,4 +49,4 @@
 </div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp"%>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/statics/js/pwdmodify.js"></script>
+	src="${pageContext.request.contextPath }/statics/js/pass/pwdmodify.js"></script>

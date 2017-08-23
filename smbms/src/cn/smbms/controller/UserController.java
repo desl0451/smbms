@@ -330,7 +330,7 @@ public class UserController {
 			user.setIdPicPath(idPicPath);
 			user.setWorkPicPath(workPicPath);
 			try {
-				if (userService.add(user)) {
+				if (userService.addUser(user)) {
 					return "redirect:/sys/user/list.html";
 				}
 			} catch (Exception e) {

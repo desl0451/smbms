@@ -7,6 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import cn.smbms.pojo.Bill;
 
 public interface BillService {
+	/**
+	 * 返回指定条件订单数量
+	 * @param queryProductName
+	 * @param queryProviderId
+	 * @param queryIsPayment
+	 * @return
+	 * @throws Exception
+	 */
 	public int getBillCount(String queryProductName, Integer queryProviderId, Integer queryIsPayment) throws Exception;
 
 	public List<Bill> getBillList(String queryProductName, Integer queryProviderId, Integer queryIsPayment,

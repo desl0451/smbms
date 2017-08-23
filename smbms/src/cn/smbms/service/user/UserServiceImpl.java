@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Override
-	public boolean add(User user) throws Exception {
+	public boolean addUser(User user) throws Exception {
 		boolean bl = false;
 		int id = userMapper.insert(user);
 		if (id > 0) {

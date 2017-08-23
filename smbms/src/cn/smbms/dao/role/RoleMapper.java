@@ -16,7 +16,11 @@ public interface RoleMapper {
 	 */
 	public List<Role> getRoleList(@Param("from") Integer currentPageNo, @Param("pageSize") Integer pageSize)
 			throws Exception;
-
+	/**
+	 * 返回全部角色信息
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Role> getRoleListAll() throws Exception;
 
 	/**

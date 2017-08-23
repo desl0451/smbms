@@ -15,13 +15,18 @@ public class BillServiceImpl implements BillService {
 
 	@Resource
 	private BillMapper billMapper;
-
+	
+	/**
+	 * 返回指定订单的记录个数
+	 */
 	@Override
 	public int getBillCount(String queryProductName, Integer queryProviderId, Integer queryIsPayment) throws Exception {
 		// TODO Auto-generated method stub
 		return billMapper.getBillCount(queryProductName, queryProviderId, queryIsPayment);
 	}
-
+	/**
+	 * 返回订单列表
+	 */
 	@Override
 	public List<Bill> getBillList(String queryProductName, Integer queryProviderId, Integer queryIsPayment,
 			Integer currentPageNo, Integer pageSize) throws Exception {

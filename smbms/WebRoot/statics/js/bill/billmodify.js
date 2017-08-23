@@ -126,7 +126,7 @@ $(function(){
 		if(productName.attr("validateStatus") == "true" 
 			&& productUnit.attr("validateStatus") == "true" 
 			&& providerId.attr("validateStatus") == "true"){
-			changeDLGContent("你确定要添加订单吗？");
+			changeDLGContent("你确定要修改订单吗？");
 			openYesOrNoDLG();
 		}
 	});

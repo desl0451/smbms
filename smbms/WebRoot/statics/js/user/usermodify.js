@@ -4,7 +4,7 @@ var phone = null;
 var userRole = null;
 var saveBtn = null;
 var backBtn = null;
-
+var billObj;
 $(function(){
 	userName = $("#userName");
 	birthday = $("#birthday");
@@ -98,11 +98,9 @@ $(function(){
 		userRole.blur();
 		if(userName.attr("validateStatus") == "true" 
 			&& phone.attr("validateStatus") == "true"
-			&& birthday.attr("validateStatus") == "true"
-		/*	&& userRole.attr("validateStatus") == "true"*/){
-			if(confirm("是否确认要提交数据？")){
-				$("#userForm").submit();
-			}
+			&& birthday.attr("validateStatus") == "true"){
+			changeDLGContent("你确定要保存用户信息吗？");
+			openYesOrNoDLG();
 		}
 	});
 	
@@ -118,4 +116,25 @@ $(function(){
 			history.back(-1);
 		}
 	});
+	$('#no').click(function() {
+		cancleBtn();
+	});
+
+	$('#yes').click(function() {
+		$("#userForm").submit();
+	});
 });
+
+function openYesOrNoDLG() {
+	$('.zhezhao').css('display', 'block');
+	$('#removeBi').fadeIn();
+}
+
+function cancleBtn() {
+	$('.zhezhao').css('display', 'none');
+	$('#removeBi').fadeOut();
+}
+function changeDLGContent(contentStr) {
+	var p = $(".removeMain").find("p");
+	p.html(contentStr);
+}

@@ -42,7 +42,7 @@
                 </div>
                 <div>
                     <label for="proDesc">描述：</label>
-                    <input type="text" name="proDesc" id="proDesc" value="强大的集团"> 
+                    <textarea rows="4" cols="60" name="proDesc" id="proDesc">强大的集团</textarea>
                 </div>
                 <div class="providerAddBtn">
                     <input type="button" name="add" id="add" value="保存">

@@ -4,7 +4,7 @@
 <div class="right">
         <div class="location">
             <strong>你现在所在的位置是:</strong>
-            <span>订单管理页面 >> 订单添加页面</span>
+            <span>订单管理页面 >> 订单修改页面</span>
         </div>
         <div class="providerAdd">
           <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/sys/bill/modifysave.html">
@@ -62,17 +62,6 @@
 
     </div>
 </section>
-<!--点击修改按钮后弹出的页面-->
-<div class="zhezhao"></div>
-<div class="remove" id="removeBi">
-    <div class="removerChid">
-        <h2>提示</h2>
-        <div class="removeMain">
-            <p>你确定要添加该订单吗？</p>
-            <a href="#" id="yes">确定</a>
-            <a href="#" id="no">取消</a>
-        </div>
-    </div>
-</div>
+
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/billmodify.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/bill/billmodify.js"></script>

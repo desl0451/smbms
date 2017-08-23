@@ -77,7 +77,7 @@ $(function(){
 		}else if(proPhone.attr("validateStatus") != "true"){
 			proPhone.blur();
 		}else{
-			changeDLGContent("是否确认提交数据?");
+			changeDLGContent("是否添加供应商信息?");
 			openYesOrNoDLG();
 		}
 	});

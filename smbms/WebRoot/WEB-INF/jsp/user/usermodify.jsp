@@ -56,7 +56,7 @@
 					</select>
         			<font color="red"></font>
                 </div>
-			 <div class="providerAddBtn">
+			    <div class="providerAddBtn">
                     <input type="button" name="save" id="save" value="保存" />
                     <input type="button" id="back" name="back" value="返回"/>
                 </div>
@@ -64,5 +64,17 @@
         </div>
     </div>
 </section>
+<!--点击删除按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<div class="remove" id="removeBi">
+    <div class="removerChid">
+        <h2>提示</h2>
+        <div class="removeMain">
+            <p>你确定要删除用户信息吗？</p>
+            <a href="#" id="yes">确定</a>
+            <a href="#" id="no">取消</a>
+        </div>
+    </div>
+</div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/user/usermodify.js"></script>

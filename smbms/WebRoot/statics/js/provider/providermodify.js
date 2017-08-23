@@ -45,7 +45,7 @@ $(function(){
 		proPhone.blur();
 		if(proContact.attr("validateStatus") == "true" && 
 				proPhone.attr("validateStatus") == "true"){
-			changeDLGContent("是否确认提交数据？");
+			changeDLGContent("是否确认保存供应商信息？");
 			openYesOrNoDLG();
 		}
 	});

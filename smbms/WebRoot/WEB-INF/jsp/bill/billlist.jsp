@@ -100,4 +100,4 @@
 </div>
 
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/billlist.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/bill/billlist.js"></script>

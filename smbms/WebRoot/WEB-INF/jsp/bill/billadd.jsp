@@ -67,4 +67,4 @@
 </div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp"%>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/statics/js/billadd.js"></script>
+	src="${pageContext.request.contextPath }/statics/js/bill/billadd.js"></script>

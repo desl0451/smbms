@@ -11,7 +11,7 @@ var a_idPicPath = null;
 var errorinfo = null;
 var errorinfo_wp = null;
 var a_workPicPath = null;
-
+var billObj;
 $(function() {
 	userCode = $("#userCode");
 	userName = $("#userName");
@@ -21,7 +21,7 @@ $(function() {
 	birthday = $("#birthday");
 	userRole = $("#userRole");
 	addBtn = $("#add");
-	backBtn = $("#back");
+	backBtn = $("#back"); 
 	a_idPicPath = $("#a_idPicPath");
 	errorinfo = $("#errorinfo");
 	a_workPicPath = $("#a_workPicPath");
@@ -229,7 +229,7 @@ $(function() {
 		} else if (phone.attr("validateStatus") != "true") {
 			phone.blur();
 		} else {
-			changeDLGContent("你确定要添加订单吗？");
+			changeDLGContent("你确定要添加用户吗？");
 			openYesOrNoDLG();
 		}
 	});

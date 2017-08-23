@@ -3,7 +3,6 @@ var backBtn = null;
 $(function(){
 	backBtn = $("#back");
 	backBtn.on("click",function(){
-		//alert("view : "+referer);
 		if(referer != undefined 
 			&& null != referer 
 			&& "" != referer

@@ -42,8 +42,32 @@ public class UserController {
 	@Resource
 	private RoleService roleService;
 
+	/*
+	 * #########################################################################
+	 * ########################
+	 */
+	/*
+	 * 查询 /** 用户管理->详细信息
+	 * 
+	 * @param id
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/view.html")
+	@ResponseBody
+	public User view(@RequestParam String id) {
+		logger.debug("View id==============" + id);
+		User user = new User();
+		try {
+			user = userService.getUserById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
 	/**
-	 * 显示全部用户列表
+	 * 用户管理->显示全部用户列表
 	 * 
 	 * @param model
 	 * @param queryUserName
@@ -105,42 +129,42 @@ public class UserController {
 		return "user/userlist";
 	}
 
-	@RequestMapping(value = "/syserror.html")
-	public String sysError() {
-		return "common/syserror";
-	}
-
-	/**
-	 * 跳转添加用户界面
-	 * 
-	 * @param user
-	 * @return
+	/*
+	 * #########################################################################
+	 * ########################
 	 */
-	@RequestMapping(value = "/useradd.html", method = RequestMethod.GET)
-	public String addUser(@ModelAttribute("user") User user) {
-		return "user/useradd";
-	}
 
-	
+	// /**
+	// * 显示用户信息页面跳转
+	// *
+	// * @param id
+	// * @param model
+	// * @return
+	// * @throws Exception
+	// */
+	// @RequestMapping(value = "/view/{id}/", method = RequestMethod.GET)
+	// public String view(@PathVariable String id, Model model) throws Exception
+	// {
+	// logger.debug("view id===================" + id);
+	// User user = userService.getUserById(id);
+	// model.addAttribute("user", user);
+	// return "user/userview";
+	// }
 
-	
+	/*
+	 * #########################################################################
+	 * ########################
+	 */
+	/* 添加修改删除 */
 	/**
-	 * 显示用户信息页面跳转
+	 * 用户管理->修改
 	 * 
-	 * @param id
 	 * @param model
+	 * @param id
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-	public String view(@PathVariable String id, Model model) throws Exception {
-		logger.debug("view id===================" + id);
-		User user = userService.getUserById(id);
-		model.addAttribute("user", user);
-		return "user/userview";
-	}
-
-	@RequestMapping(value = "/usermodify/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/usermodify/{id}/", method = RequestMethod.GET)
 	public String usermodify(Model model, @PathVariable String id) throws Exception {
 		User user = userService.getUserById(id);
 		model.addAttribute("user", user);
@@ -152,7 +176,7 @@ public class UserController {
 	}
 
 	/**
-	 * 验证用户名是否正确
+	 * 用户管理->用户名称->验证用户名是否正确
 	 * 
 	 * @param userCode
 	 * @return
@@ -177,7 +201,7 @@ public class UserController {
 	}
 
 	/**
-	 * 返回页面加载时显示的角色信息
+	 * 用户管理->用户角色->返回页面加载时显示的角色信息
 	 * 
 	 * @return
 	 */
@@ -197,7 +221,7 @@ public class UserController {
 	}
 
 	/**
-	 * 删除用户信息
+	 * 用户管理->删除用户信息
 	 * 
 	 * @param userid
 	 * @return
@@ -219,47 +243,26 @@ public class UserController {
 		return JSONArray.toJSONString(resultMap);
 	}
 
-	@RequestMapping(value = "/pwdsave.html", method = RequestMethod.POST)
-	public String pwdSave(@RequestParam(value = "newpassword") String newPassword, HttpSession session,
-			HttpServletRequest request, Model model) {
-		boolean flag = false;
-		Object o = session.getAttribute(Constants.USER_SESSION);
-		if (o != null && !StringUtils.isNullOrEmpty(newPassword)) {
-			try {
-				flag = userService.updatePwd(((User) o).getId(), newPassword);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (flag) {
-				request.setAttribute(Constants.SYS_MESSAGE, "修改密码成功,请退出并使用新密码重新登录！");
-				model.addAttribute("message", "修改密码成功,请退出并使用新密码重新登录！");
-				session.removeAttribute(Constants.USER_SESSION);// session注销
-				return "login";
-			} else {
-				request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
-				model.addAttribute("message", "修改密码失败！");
-			}
-		} else {
-			request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
-			model.addAttribute("message", "修改密码失败！");
-		}
-		return "user/userlist";
+	/**
+	 * 用户管理->添加用户
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "/useradd.html", method = RequestMethod.GET)
+	public String addUser(@ModelAttribute("user") User user) {
+		return "user/useradd";
 	}
 
-	@RequestMapping(value = "/view.html")
-	@ResponseBody
-	public User view(@RequestParam String id) {
-		logger.debug("View id==============" + id);
-		User user = new User();
-		try {
-			user = userService.getUserById(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
-
+	/**
+	 * 用户管理->添加用户->保存用户##添加
+	 * 
+	 * @param user
+	 * @param session
+	 * @param request
+	 * @param attachs
+	 * @return
+	 */
 	@RequestMapping(value = "/addsave.html", method = RequestMethod.POST)
 	public String addUserSave(User user, HttpSession session, HttpServletRequest request,
 			@RequestParam(value = "attachs", required = false) MultipartFile[] attachs) {
@@ -307,10 +310,10 @@ public class UserController {
 					}
 					if (i == 0) {
 
-						idPicPath =File.separator+ path2 + File.separator + fileName;
+						idPicPath = File.separator + path2 + File.separator + fileName;
 
 					} else if (i == 1) {
-						workPicPath = File.separator+path2 + File.separator + fileName;
+						workPicPath = File.separator + path2 + File.separator + fileName;
 					}
 					logger.debug("idPicPath: " + idPicPath);
 					logger.debug("workPicPath: " + workPicPath);
@@ -336,6 +339,15 @@ public class UserController {
 			}
 		}
 		return "user/useradd";
+	}
+
+	/*
+	 * #########################################################################
+	 * ########################
+	 */
+	@RequestMapping(value = "/syserror.html")
+	public String sysError() {
+		return "common/syserror";
 	}
 
 }

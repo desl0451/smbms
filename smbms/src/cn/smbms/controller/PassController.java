@@ -3,10 +3,12 @@ package cn.smbms.controller;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,5 +70,39 @@ public class PassController {
 
 		return JSONArray.toJSONString(resultMap);
 	}
-
+	/**
+	 * 设置新密码
+	 * @param newPassword
+	 * @param session
+	 * @param request
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/pwdsave.html", method = RequestMethod.POST)
+	public String pwdSave(@RequestParam(value = "newpassword") String newPassword, HttpSession session,
+			HttpServletRequest request, Model model) {
+		boolean flag = false;
+		Object o = session.getAttribute(Constants.USER_SESSION);
+		if (o != null && !StringUtils.isNullOrEmpty(newPassword)) {
+			try {
+				flag = userService.updatePwd(((User) o).getId(), newPassword);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (flag) {
+				request.setAttribute(Constants.SYS_MESSAGE, "修改密码成功,请退出并使用新密码重新登录！");
+				model.addAttribute("message", "修改密码成功,请退出并使用新密码重新登录！");
+				session.removeAttribute(Constants.USER_SESSION);// session注销
+				return "login";
+			} else {
+				request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
+				model.addAttribute("message", "修改密码失败！");
+			}
+		} else {
+			request.setAttribute(Constants.SYS_MESSAGE, "修改密码失败！");
+			model.addAttribute("message", "修改密码失败！");
+		}
+		return "user/userlist";
+	}
 }

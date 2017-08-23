@@ -64,4 +64,4 @@
 	</div>
 </div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/provideradd.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/provider/provideradd.js"></script>

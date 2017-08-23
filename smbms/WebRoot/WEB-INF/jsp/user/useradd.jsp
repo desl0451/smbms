@@ -80,5 +80,16 @@
         </div>
 </div>
 </section>
+<!--点击添加按钮后弹出的页面-->
+<div class="zhezhao"></div>
+<div class="remove" id="removeProv">
+	<div class="removerChid">
+		<h2>提示</h2>
+		<div class="removeMain">
+			<p>你确定要保存该用户信息吗？</p>
+			<a href="#" id="yes">确定</a> <a href="#" id="no">取消</a>
+		</div>
+	</div>
+</div>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/useradd.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/user/useradd.js"></script>

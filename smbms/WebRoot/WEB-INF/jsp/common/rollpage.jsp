@@ -32,5 +32,5 @@
 	</div>
 </body>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath }/statics/js/rollpage.js"></script>
+	src="${pageContext.request.contextPath }/statics/js/common/rollpage.js"></script>
 </html>

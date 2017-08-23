@@ -119,7 +119,7 @@ public class BillController {
 
 	@RequestMapping(value = "/syserror.html")
 	public String sysError() {
-		return "syserror";
+		return "common/syserror";
 	}
 
 	/**

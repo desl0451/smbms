@@ -69,7 +69,7 @@ public class RoleController {
 
 	@RequestMapping(value = "/syserror.html")
 	public String sysError() {
-		return "syserror";
+		return "common/syserror";
 	}
 
 	@RequestMapping(value = "/view.html")

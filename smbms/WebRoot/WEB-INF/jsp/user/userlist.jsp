@@ -70,7 +70,7 @@
 				</c:forEach>
 			</table>
 			<input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
-		  	<c:import url="../rollpage.jsp">
+		  	<c:import url="../common/rollpage.jsp">
 	          	<c:param name="totalCount" value="${totalCount}"/>
 	          	<c:param name="currentPageNo" value="${currentPageNo}"/>
 	          	<c:param name="totalPageCount" value="${totalPageCount}"/>
@@ -143,4 +143,4 @@
 </div>
 
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/userlist.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/user/userlist.js"></script>

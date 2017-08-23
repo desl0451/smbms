@@ -47,11 +47,11 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		// Çå³ýsession
 		session.removeAttribute(Constants.USER_SESSION);
-		return "login";
+		return "common/login";
 	}
 
 	@RequestMapping(value = "/sys/main.html")
 	public String main() {
-		return "frame";
+		return "common/frame";
 	}
 }

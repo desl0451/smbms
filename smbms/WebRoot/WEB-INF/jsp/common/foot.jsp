@@ -4,9 +4,9 @@
 <footer class="footer">
     版权归北大青鸟
 </footer>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/time.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/common/time.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/common/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/statics/calendar/WdatePicker.js"></script>
 </body>
 </html>

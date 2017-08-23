@@ -65,4 +65,4 @@
     </div>
 </section>
 <%@include file="/WEB-INF/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/usermodify.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/user/usermodify.js"></script>

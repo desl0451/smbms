@@ -19,4 +19,8 @@
 	<select id="getRoleById" resultType="role">
 		SELECT * FROM smbms.smbms_role  WHERE id=#{id}		
 	</select>
+	<!-- 根据roleCode查询用户对象 -->
+	<select id="selectRoleByCode" resultType="Role">
+			SELECT * FROM smbms.smbms_role  WHERE roleCode=#{roleCode}		 
+	</select>
 </mapper>

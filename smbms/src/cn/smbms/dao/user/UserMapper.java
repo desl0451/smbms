@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import cn.smbms.pojo.Role;
 import cn.smbms.pojo.User;
 
 public interface UserMapper {
@@ -48,6 +49,7 @@ public interface UserMapper {
 	 */
 	public int getUserCount(@Param("userName") String userName, @Param("userRole") Integer userRole) throws Exception;
 
+	
 	/**
 	 * Í¨¹ýuserIdÉ¾³ýuser
 	 * 

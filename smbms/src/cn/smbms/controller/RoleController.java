@@ -1,5 +1,6 @@
 package cn.smbms.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,14 +8,15 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
+import com.mysql.jdbc.StringUtils;
+
 import cn.smbms.pojo.Role;
-import cn.smbms.pojo.User;
 import cn.smbms.service.role.RoleService;
 import cn.smbms.tools.Constants;
 import cn.smbms.tools.PageSupport;
@@ -72,6 +74,11 @@ public class RoleController {
 		return "common/syserror";
 	}
 
+	/**
+	 *
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/view.html")
 	@ResponseBody
 	public Role view(@RequestParam String id) {
@@ -84,4 +91,36 @@ public class RoleController {
 		}
 		return role;
 	}
+
+	/**
+	 * 角色管理->添加角色
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/roleadd.html", method = RequestMethod.GET)
+	public String addRole() {
+		logger.debug("addView");
+		return "role/roleadd";
+	}
+
+	/**
+	 * 角色管理->添加角色->角色编码检查
+	 */
+	@RequestMapping(value = "/roleExist.json")
+	@ResponseBody
+	public Object selectRoleExist(@RequestParam String roleCode) {
+		logger.debug("selectRoleExist==================" + roleCode);
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		if (StringUtils.isNullOrEmpty(roleCode)) {
+			hashMap.put("roleCode", "null");
+		} else {
+			if(roleService.selectRoleCodeExist(roleCode)!=null){
+				hashMap.put("roleCode", "true");
+			}else{
+				hashMap.put("roleCode", "error");
+			}
+		}
+		return JSONArray.toJSONString(hashMap);
+	}
+
 }

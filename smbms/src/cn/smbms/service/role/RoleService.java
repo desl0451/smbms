@@ -3,6 +3,7 @@ package cn.smbms.service.role;
 import java.util.List;
 
 import cn.smbms.pojo.Role;
+import cn.smbms.pojo.User;
 
 public interface RoleService {
 	/**
@@ -34,4 +35,11 @@ public interface RoleService {
 	 */
 	public Role getRoleById(Integer id);
 
+	/**
+	 * 根据roleCode查询出User
+	 * 
+	 * @param userCode
+	 * @return
+	 */
+	public Role selectRoleCodeExist(String roleCode);
 }

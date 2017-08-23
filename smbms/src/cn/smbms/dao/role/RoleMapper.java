@@ -35,4 +35,9 @@ public interface RoleMapper {
 	 * 根据ID查询角色信息
 	 */
 	public Role getRoleById(@Param("id") Integer id);
+	
+	/**
+	 * 根据roleCode查询角色信息
+	 */
+	public Role selectRoleByCode(@Param("roleCode")String roleCode);
 }

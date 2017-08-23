@@ -30,8 +30,6 @@ $(function(){
 				userRole.html("");
 				var options = "<option value=\"0\">请选择</option>";
 				for(var i = 0; i < data.length; i++){
-					//alert(data[i].id);
-					//alert(data[i].roleName);
 					if(rid != null && rid != undefined && data[i].id == rid ){
 						options += "<option selected=\"selected\" value=\""+data[i].id+"\" >"+data[i].roleName+"</option>";
 					}else{

@@ -5,7 +5,11 @@
 	<div class="location">
 		<strong>你现在所在的位置是:</strong> <span>角色管理页面</span>
 	</div>
-	<!--用户-->
+	<div class="search">
+		<form>
+			<a href="${pageContext.request.contextPath }/sys/role/roleadd.html">添加角色</a>
+		</form>
+	</div>
 	<table class="providerTable" cellpadding="0" cellspacing="0">
 		<tr class="firstTr">
 			<th width="25%">角色编码</th>

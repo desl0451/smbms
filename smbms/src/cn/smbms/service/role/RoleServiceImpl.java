@@ -28,6 +28,15 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	/**
+	 * 根据roleCode查询角色信息
+	 */
+	@Override
+	public Role selectRoleCodeExist(String roleCode) {
+		// TODO Auto-generated method stub
+		return roleMapper.selectRoleByCode(roleCode);
+	}
+
+	/**
 	 * 查询全部记录数
 	 */
 	@Override
@@ -35,7 +44,6 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		return roleMapper.getRoleCount();
 	}
-
 
 	/**
 	 * 根据ID查询角色信息

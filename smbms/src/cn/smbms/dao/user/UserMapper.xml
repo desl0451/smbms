@@ -49,7 +49,7 @@
 			and u.id=#{id}
 		</if>
 	</select>
-
+	
 	<!-- 根据ID删除用户对象 -->
 	<delete id="delete">
 		delete from smbms_user where id=#{id}
